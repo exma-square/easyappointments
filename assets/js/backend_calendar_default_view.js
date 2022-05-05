@@ -1029,18 +1029,35 @@ window.BackendCalendarDefaultView = window.BackendCalendarDefaultView || {};
                 // Add appointments to calendar.
                 var appointmentEvents = [];
                 response.appointments.forEach(function (appointment) {
-                    var appointmentEvent = {
-                        id: appointment.id,
-                        title: appointment.service.name + ' - '
-                            + appointment.customer.first_name + ' '
-                            + appointment.customer.last_name,
-                        start: moment(appointment.start_datetime),
-                        end: moment(appointment.end_datetime),
-                        allDay: false,
-                        data: appointment // Store appointment data for later use.
-                    };
-
-                    calendarEventSource.push(appointmentEvent);
+                    if(appointment.situation == 0){
+                        var appointmentEvent = {
+                            id: appointment.id,
+                            title: appointment.service.name + ' - '
+                                + appointment.customer.first_name + ' '
+                                + appointment.customer.last_name,
+                            start: moment(appointment.start_datetime),
+                            end: moment(appointment.end_datetime),
+                            allDay: false,
+                            color: '#E06666',
+                            data: appointment // Store appointment data for later use.
+                        };
+    
+                        calendarEventSource.push(appointmentEvent);
+                    }else if(appointment.situation == 1){
+                        var appointmentEvent = {
+                            id: appointment.id,
+                            title: appointment.service.name + ' - '
+                                + appointment.customer.first_name + ' '
+                                + appointment.customer.last_name,
+                            start: moment(appointment.start_datetime),
+                            end: moment(appointment.end_datetime),
+                            allDay: false,
+                            color: '#6FA8DC',
+                            data: appointment // Store appointment data for later use.
+                        };
+    
+                        calendarEventSource.push(appointmentEvent);
+                    }
                 });
 
                 // Add custom unavailable periods (they are always displayed on the calendar, even if the provider won't
