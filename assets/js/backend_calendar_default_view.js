@@ -258,6 +258,106 @@ window.BackendCalendarDefaultView = window.BackendCalendarDefaultView || {};
         });
 
         /**
+         * Event: Popover Refuse Button "Click"
+         *
+         * Hides the open popover element.
+         */
+         $calendarPage.on('click', '.refuse-popover', function () {
+            $(this).parents('.popover').popover('dispose');
+
+            var auditAppointment = lastFocusedEventData.data;
+            var appointment = {
+                id: lastFocusedEventData.data.id,
+                id_services: lastFocusedEventData.data.id_services,
+                id_users_provider: lastFocusedEventData.data.id_users_provider,
+                id_users_customer: lastFocusedEventData.data.customer.id,
+                start_datetime: lastFocusedEventData.data.start_datetime,
+                end_datetime: lastFocusedEventData.data.end_datetime,
+                location: lastFocusedEventData.data.location,
+                notes: lastFocusedEventData.data.notes,
+                is_unavailable: false,
+                situation: 2
+            };
+            
+            var customer = {
+                id: auditAppointment.customer.id,
+                first_name: auditAppointment.customer.first_name,
+                last_name: auditAppointment.customer.last_name,
+                email: auditAppointment.customer.email,
+                phone_number: auditAppointment.customer.phone_number,
+                address: auditAppointment.customer.address,
+                city: auditAppointment.customer.city,
+                zip_code: auditAppointment.customer.zip_code,
+                notes: auditAppointment.customer.notes
+            };
+
+            // Define success callback.
+            var successCallback = function (response) {
+                // Display success message to the user.
+                Backend.displayNotification(EALang.appointment_saved);
+                $('#select-filter-item').trigger('change');
+            };
+
+            // Define error callback.
+            var errorCallback = function () {
+                alert(EALang.service_communication_error);
+            };
+
+            // Save appointment data.
+            BackendCalendarApi.saveAppointment(appointment, customer, successCallback, errorCallback);
+        });
+
+        /**
+         * Event: Popover Pass Button "Click"
+         *
+         * Hides the open popover element.
+         */
+         $calendarPage.on('click', '.pass-popover', function () {
+            $(this).parents('.popover').popover('dispose');
+
+            var auditAppointment = lastFocusedEventData.data;
+            var appointment = {
+                id: lastFocusedEventData.data.id,
+                id_services: lastFocusedEventData.data.id_services,
+                id_users_provider: lastFocusedEventData.data.id_users_provider,
+                id_users_customer: lastFocusedEventData.data.customer.id,
+                start_datetime: lastFocusedEventData.data.start_datetime,
+                end_datetime: lastFocusedEventData.data.end_datetime,
+                location: lastFocusedEventData.data.location,
+                notes: lastFocusedEventData.data.notes,
+                is_unavailable: false,
+                situation: 1
+            };
+            
+            var customer = {
+                id: auditAppointment.customer.id,
+                first_name: auditAppointment.customer.first_name,
+                last_name: auditAppointment.customer.last_name,
+                email: auditAppointment.customer.email,
+                phone_number: auditAppointment.customer.phone_number,
+                address: auditAppointment.customer.address,
+                city: auditAppointment.customer.city,
+                zip_code: auditAppointment.customer.zip_code,
+                notes: auditAppointment.customer.notes
+            };
+
+            // Define success callback.
+            var successCallback = function (response) {
+                // Display success message to the user.
+                Backend.displayNotification(EALang.appointment_saved);
+                $('#select-filter-item').trigger('change');
+            };
+
+            // Define error callback.
+            var errorCallback = function () {
+                alert(EALang.service_communication_error);
+            };
+
+            // Save appointment data.
+            BackendCalendarApi.saveAppointment(appointment, customer, successCallback, errorCallback);
+        });
+
+        /**
          * Event: Calendar Filter Item "Change"
          *
          * Load the appointments that correspond to the select filter item and display them on the calendar.
@@ -605,24 +705,24 @@ window.BackendCalendarDefaultView = window.BackendCalendarDefaultView || {};
                                     ]
                                 }),
                                 $('<button/>', {
-                                    'class': 'delete-popover btn btn-outline-secondary ' + displayDelete,
+                                    'class': 'refuse-popover btn btn-outline-secondary ' + displayDelete,
                                     'html': [
                                         $('<i/>', {
                                             'class': 'fas fa-trash-alt mr-2'
                                         }),
                                         $('<span/>', {
-                                            'text': EALang.delete
+                                            'text': '拒絕'
                                         })
                                     ]
                                 }),
                                 $('<button/>', {
-                                    'class': 'edit-popover btn btn-primary ' + displayEdit,
+                                    'class': 'pass-popover btn btn-primary ' + displayEdit,
                                     'html': [
                                         $('<i/>', {
                                             'class': 'fas fa-edit mr-2'
                                         }),
                                         $('<span/>', {
-                                            'text': EALang.edit
+                                            'text': '通過'
                                         })
                                     ]
                                 })
@@ -630,7 +730,7 @@ window.BackendCalendarDefaultView = window.BackendCalendarDefaultView || {};
                         })
                     ]
                 });
-            }else if(event.data.situation ==1){
+            }else if(event.data.situation == 1){
                 $html = $('<div/>', {
                     'html': [
                         $('<strong/>', {
@@ -995,7 +1095,7 @@ window.BackendCalendarDefaultView = window.BackendCalendarDefaultView || {};
 
                     var data = {
                         csrfToken: GlobalVariables.csrfToken,
-                        appointment_data: JSON.stringify(appointment),
+                        appointment_data: JSON.stringify(appointment)
                     };
 
                     $.post(url, data)
