@@ -81,7 +81,8 @@ window.BackendCalendarAppointmentsModal = window.BackendCalendarAppointmentsModa
                 end_datetime: endDatetime,
                 location: $dialog.find('#appointment-location').val(),
                 notes: $dialog.find('#appointment-notes').val(),
-                is_unavailable: false
+                is_unavailable: false,
+                situation: 0
             };
 
             if ($dialog.find('#appointment-id').val() !== '') {

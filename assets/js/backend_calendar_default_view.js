@@ -258,6 +258,76 @@ window.BackendCalendarDefaultView = window.BackendCalendarDefaultView || {};
         });
 
         /**
+         * Event: Function Aduit Appointment Situation
+         */
+        function triggerApproveEvent(situation){
+            var auditAppointment = lastFocusedEventData.data;
+            var appointment = {
+                id: lastFocusedEventData.data.id,
+                id_services: lastFocusedEventData.data.id_services,
+                id_users_provider: lastFocusedEventData.data.id_users_provider,
+                id_users_customer: lastFocusedEventData.data.customer.id,
+                start_datetime: lastFocusedEventData.data.start_datetime,
+                end_datetime: lastFocusedEventData.data.end_datetime,
+                location: lastFocusedEventData.data.location,
+                notes: lastFocusedEventData.data.notes,
+                is_unavailable: false,
+                situation: situation
+            };
+            
+            var customer = {
+                id: auditAppointment.customer.id,
+                first_name: auditAppointment.customer.first_name,
+                last_name: auditAppointment.customer.last_name,
+                email: auditAppointment.customer.email,
+                phone_number: auditAppointment.customer.phone_number,
+                address: auditAppointment.customer.address,
+                city: auditAppointment.customer.city,
+                zip_code: auditAppointment.customer.zip_code,
+                notes: auditAppointment.customer.notes
+            };
+
+            // Define success callback.
+            var successCallback = function (response) {
+                // Display success message to the user.
+                Backend.displayNotification(EALang.appointment_saved);
+                $('#select-filter-item').trigger('change');
+            };
+
+            // Define error callback.
+            var errorCallback = function () {
+                alert(EALang.service_communication_error);
+            };
+
+            // Save appointment data.
+            BackendCalendarApi.saveAppointment(appointment, customer, successCallback, errorCallback);
+        }
+
+        /**
+         * Event: Popover Refuse Button "Click"
+         *
+         * Hides the open popover element.
+         */
+         $calendarPage.on('click', '.refuse-popover', function () {
+            $(this).parents('.popover').popover('dispose');
+
+            var situation = 2;
+            triggerApproveEvent(situation);
+        });
+
+        /**
+         * Event: Popover Pass Button "Click"
+         *
+         * Hides the open popover element.
+         */
+         $calendarPage.on('click', '.pass-popover', function () {
+            $(this).parents('.popover').popover('dispose');
+
+            var situation = 1;
+            triggerApproveEvent(situation);
+        });
+
+        /**
          * Event: Calendar Filter Item "Change"
          *
          * Load the appointments that correspond to the select filter item and display them on the calendar.
@@ -507,129 +577,253 @@ window.BackendCalendarDefaultView = window.BackendCalendarDefaultView || {};
                 ? 'mr-2' : 'd-none';
             displayDelete = (GlobalVariables.user.privileges.appointments.delete === true)
                 ? 'mr-2' : 'd-none';
-
-            $html = $('<div/>', {
-                'html': [
-                    $('<strong/>', {
-                        'class': 'd-inline-block mr-2',
-                        'text': EALang.start
-                    }),
-                    $('<span/>', {
-                        'text': GeneralFunctions.formatDate(event.start.format('MM-DD HH:mm'), GlobalVariables.dateFormat, true)
-                    }),
-                    $('<br/>'),
-
-                    $('<strong/>', {
-                        'class': 'd-inline-block mr-2',
-                        'text': EALang.end
-                    }),
-                    $('<span/>', {
-                        'text': GeneralFunctions.formatDate(event.end.format('MM-DD HH:mm'), GlobalVariables.dateFormat, true)
-                    }),
-                    $('<br/>'),
-
-                    $('<strong/>', {
-                        'class': 'd-inline-block mr-2',
-                        'text': EALang.service
-                    }),
-                    $('<span/>', {
-                        'text': event.data.service.name
-                    }),
-                    $('<br/>'),
-
-                    $('<strong/>', {
-                        'class': 'd-inline-block mr-2',
-                        'text': EALang.provider
-                    }),
-                    GeneralFunctions.renderMapIcon(event.data.provider),
-                    $('<span/>', {
-                        'text': event.data.provider.first_name + ' ' + event.data.provider.last_name
-                    }),
-                    $('<br/>'),
-
-                    $('<strong/>', {
-                        'class': 'd-inline-block mr-2',
-                        'text': EALang.customer
-                    }),
-                    GeneralFunctions.renderMapIcon(event.data.customer),
-                    $('<span/>', {
-                        'class': 'd-inline-block ml-1',
-                        'text': event.data.customer.first_name + ' ' + event.data.customer.last_name
-                    }),
-                    $('<br/>'),
-
-                    $('<strong/>', {
-                        'class': 'd-inline-block mr-2',
-                        'text': EALang.email
-                    }),
-                    GeneralFunctions.renderMailIcon(event.data.customer.email),
-                    $('<span/>', {
-                        'class': 'd-inline-block ml-1',
-                        'text': event.data.customer.email
-                    }),
-                    $('<br/>'),
-
-                    $('<strong/>', {
-                        'class': 'd-inline-block mr-2',
-                        'text': EALang.phone
-                    }),
-                    GeneralFunctions.renderPhoneIcon(event.data.customer.phone_number),
-                    $('<span/>', {
-                        'class': 'd-inline-block ml-1',
-                        'text': event.data.customer.phone_number
-                    }),
-                    $('<br/>'),
-
-                    $('<strong/>', {
-                        'text': EALang.notes
-                    }),
-                    $('<span/>', {
-                        'text': getEventNotes(event)
-                    }),
-                    $('<br/>'),
-
-                    $('<hr/>'),
-
-                    $('<div/>', {
-                        'class': 'd-flex justify-content-center',
-                        'html': [
-                            $('<button/>', {
-                                'class': 'close-popover btn btn-outline-secondary mr-2',
-                                'html': [
-                                    $('<i/>', {
-                                        'class': 'fas fa-ban mr-2'
-                                    }),
-                                    $('<span/>', {
-                                        'text': EALang.close
-                                    })
-                                ]
-                            }),
-                            $('<button/>', {
-                                'class': 'delete-popover btn btn-outline-secondary ' + displayDelete,
-                                'html': [
-                                    $('<i/>', {
-                                        'class': 'fas fa-trash-alt mr-2'
-                                    }),
-                                    $('<span/>', {
-                                        'text': EALang.delete
-                                    })
-                                ]
-                            }),
-                            $('<button/>', {
-                                'class': 'edit-popover btn btn-primary ' + displayEdit,
-                                'html': [
-                                    $('<i/>', {
-                                        'class': 'fas fa-edit mr-2'
-                                    }),
-                                    $('<span/>', {
-                                        'text': EALang.edit
-                                    })
-                                ]
-                            })
-                        ]
-                    })
-                ]
-            });
+            if(event.data.situation == 0){
+                $html = $('<div/>', {
+                    'html': [
+                        $('<strong/>', {
+                            'class': 'd-inline-block mr-2',
+                            'text': EALang.start
+                        }),
+                        $('<span/>', {
+                            'text': GeneralFunctions.formatDate(event.start.format('MM-DD HH:mm'), GlobalVariables.dateFormat, true)
+                        }),
+                        $('<br/>'),
+    
+                        $('<strong/>', {
+                            'class': 'd-inline-block mr-2',
+                            'text': EALang.end
+                        }),
+                        $('<span/>', {
+                            'text': GeneralFunctions.formatDate(event.end.format('MM-DD HH:mm'), GlobalVariables.dateFormat, true)
+                        }),
+                        $('<br/>'),
+    
+                        $('<strong/>', {
+                            'class': 'd-inline-block mr-2',
+                            'text': EALang.service
+                        }),
+                        $('<span/>', {
+                            'text': event.data.service.name
+                        }),
+                        $('<br/>'),
+    
+                        $('<strong/>', {
+                            'class': 'd-inline-block mr-2',
+                            'text': EALang.provider
+                        }),
+                        GeneralFunctions.renderMapIcon(event.data.provider),
+                        $('<span/>', {
+                            'text': event.data.provider.first_name + ' ' + event.data.provider.last_name
+                        }),
+                        $('<br/>'),
+    
+                        $('<strong/>', {
+                            'class': 'd-inline-block mr-2',
+                            'text': EALang.customer
+                        }),
+                        GeneralFunctions.renderMapIcon(event.data.customer),
+                        $('<span/>', {
+                            'class': 'd-inline-block ml-1',
+                            'text': event.data.customer.first_name + ' ' + event.data.customer.last_name
+                        }),
+                        $('<br/>'),
+    
+                        $('<strong/>', {
+                            'class': 'd-inline-block mr-2',
+                            'text': EALang.email
+                        }),
+                        GeneralFunctions.renderMailIcon(event.data.customer.email),
+                        $('<span/>', {
+                            'class': 'd-inline-block ml-1',
+                            'text': event.data.customer.email
+                        }),
+                        $('<br/>'),
+    
+                        $('<strong/>', {
+                            'class': 'd-inline-block mr-2',
+                            'text': EALang.phone
+                        }),
+                        GeneralFunctions.renderPhoneIcon(event.data.customer.phone_number),
+                        $('<span/>', {
+                            'class': 'd-inline-block ml-1',
+                            'text': event.data.customer.phone_number
+                        }),
+                        $('<br/>'),
+    
+                        $('<strong/>', {
+                            'text': EALang.notes
+                        }),
+                        $('<span/>', {
+                            'text': getEventNotes(event)
+                        }),
+                        $('<br/>'),
+    
+                        $('<hr/>'),
+    
+                        $('<div/>', {
+                            'class': 'd-flex justify-content-center',
+                            'html': [
+                                $('<button/>', {
+                                    'class': 'close-popover btn btn-outline-secondary mr-2',
+                                    'html': [
+                                        $('<i/>', {
+                                            'class': 'fas fa-ban mr-2'
+                                        }),
+                                        $('<span/>', {
+                                            'text': EALang.close
+                                        })
+                                    ]
+                                }),
+                                $('<button/>', {
+                                    'class': 'refuse-popover btn btn-outline-secondary ' + displayDelete,
+                                    'html': [
+                                        $('<i/>', {
+                                            'class': 'fas fa-trash-alt mr-2'
+                                        }),
+                                        $('<span/>', {
+                                            'text': '拒絕'
+                                        })
+                                    ]
+                                }),
+                                $('<button/>', {
+                                    'class': 'pass-popover btn btn-primary ' + displayEdit,
+                                    'html': [
+                                        $('<i/>', {
+                                            'class': 'fas fa-edit mr-2'
+                                        }),
+                                        $('<span/>', {
+                                            'text': '通過'
+                                        })
+                                    ]
+                                })
+                            ]
+                        })
+                    ]
+                });
+            }else if(event.data.situation == 1){
+                $html = $('<div/>', {
+                    'html': [
+                        $('<strong/>', {
+                            'class': 'd-inline-block mr-2',
+                            'text': EALang.start
+                        }),
+                        $('<span/>', {
+                            'text': GeneralFunctions.formatDate(event.start.format('MM-DD HH:mm'), GlobalVariables.dateFormat, true)
+                        }),
+                        $('<br/>'),
+    
+                        $('<strong/>', {
+                            'class': 'd-inline-block mr-2',
+                            'text': EALang.end
+                        }),
+                        $('<span/>', {
+                            'text': GeneralFunctions.formatDate(event.end.format('MM-DD HH:mm'), GlobalVariables.dateFormat, true)
+                        }),
+                        $('<br/>'),
+    
+                        $('<strong/>', {
+                            'class': 'd-inline-block mr-2',
+                            'text': EALang.service
+                        }),
+                        $('<span/>', {
+                            'text': event.data.service.name
+                        }),
+                        $('<br/>'),
+    
+                        $('<strong/>', {
+                            'class': 'd-inline-block mr-2',
+                            'text': EALang.provider
+                        }),
+                        GeneralFunctions.renderMapIcon(event.data.provider),
+                        $('<span/>', {
+                            'text': event.data.provider.first_name + ' ' + event.data.provider.last_name
+                        }),
+                        $('<br/>'),
+    
+                        $('<strong/>', {
+                            'class': 'd-inline-block mr-2',
+                            'text': EALang.customer
+                        }),
+                        GeneralFunctions.renderMapIcon(event.data.customer),
+                        $('<span/>', {
+                            'class': 'd-inline-block ml-1',
+                            'text': event.data.customer.first_name + ' ' + event.data.customer.last_name
+                        }),
+                        $('<br/>'),
+    
+                        $('<strong/>', {
+                            'class': 'd-inline-block mr-2',
+                            'text': EALang.email
+                        }),
+                        GeneralFunctions.renderMailIcon(event.data.customer.email),
+                        $('<span/>', {
+                            'class': 'd-inline-block ml-1',
+                            'text': event.data.customer.email
+                        }),
+                        $('<br/>'),
+    
+                        $('<strong/>', {
+                            'class': 'd-inline-block mr-2',
+                            'text': EALang.phone
+                        }),
+                        GeneralFunctions.renderPhoneIcon(event.data.customer.phone_number),
+                        $('<span/>', {
+                            'class': 'd-inline-block ml-1',
+                            'text': event.data.customer.phone_number
+                        }),
+                        $('<br/>'),
+    
+                        $('<strong/>', {
+                            'text': EALang.notes
+                        }),
+                        $('<span/>', {
+                            'text': getEventNotes(event)
+                        }),
+                        $('<br/>'),
+    
+                        $('<hr/>'),
+    
+                        $('<div/>', {
+                            'class': 'd-flex justify-content-center',
+                            'html': [
+                                $('<button/>', {
+                                    'class': 'close-popover btn btn-outline-secondary mr-2',
+                                    'html': [
+                                        $('<i/>', {
+                                            'class': 'fas fa-ban mr-2'
+                                        }),
+                                        $('<span/>', {
+                                            'text': EALang.close
+                                        })
+                                    ]
+                                }),
+                                $('<button/>', {
+                                    'class': 'delete-popover btn btn-outline-secondary ' + displayDelete,
+                                    'html': [
+                                        $('<i/>', {
+                                            'class': 'fas fa-trash-alt mr-2'
+                                        }),
+                                        $('<span/>', {
+                                            'text': EALang.delete
+                                        })
+                                    ]
+                                }),
+                                $('<button/>', {
+                                    'class': 'edit-popover btn btn-primary ' + displayEdit,
+                                    'html': [
+                                        $('<i/>', {
+                                            'class': 'fas fa-edit mr-2'
+                                        }),
+                                        $('<span/>', {
+                                            'text': EALang.edit
+                                        })
+                                    ]
+                                })
+                            ]
+                        })
+                    ]
+                });
+            }
         }
 
         $(jsEvent.target).popover({
@@ -865,6 +1059,7 @@ window.BackendCalendarDefaultView = window.BackendCalendarDefaultView || {};
 
                     event.data.start_datetime = appointment.start_datetime;
                     event.data.end_datetime = appointment.end_datetime;
+                    event.data.situation = appointment.situation;
 
                     var url = GlobalVariables.baseUrl + '/index.php/backend_api/ajax_save_appointment';
 
@@ -1029,18 +1224,35 @@ window.BackendCalendarDefaultView = window.BackendCalendarDefaultView || {};
                 // Add appointments to calendar.
                 var appointmentEvents = [];
                 response.appointments.forEach(function (appointment) {
-                    var appointmentEvent = {
-                        id: appointment.id,
-                        title: appointment.service.name + ' - '
-                            + appointment.customer.first_name + ' '
-                            + appointment.customer.last_name,
-                        start: moment(appointment.start_datetime),
-                        end: moment(appointment.end_datetime),
-                        allDay: false,
-                        data: appointment // Store appointment data for later use.
-                    };
-
-                    calendarEventSource.push(appointmentEvent);
+                    if(appointment.situation == 0){
+                        var appointmentEvent = {
+                            id: appointment.id,
+                            title: appointment.service.name + ' - '
+                                + appointment.customer.first_name + ' '
+                                + appointment.customer.last_name,
+                            start: moment(appointment.start_datetime),
+                            end: moment(appointment.end_datetime),
+                            allDay: false,
+                            color: '#E06666',
+                            data: appointment // Store appointment data for later use.
+                        };
+    
+                        calendarEventSource.push(appointmentEvent);
+                    }else if(appointment.situation == 1){
+                        var appointmentEvent = {
+                            id: appointment.id,
+                            title: appointment.service.name + ' - '
+                                + appointment.customer.first_name + ' '
+                                + appointment.customer.last_name,
+                            start: moment(appointment.start_datetime),
+                            end: moment(appointment.end_datetime),
+                            allDay: false,
+                            color: '#6FA8DC',
+                            data: appointment // Store appointment data for later use.
+                        };
+    
+                        calendarEventSource.push(appointmentEvent);
+                    }
                 });
 
                 // Add custom unavailable periods (they are always displayed on the calendar, even if the provider won't
