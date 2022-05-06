@@ -258,13 +258,9 @@ window.BackendCalendarDefaultView = window.BackendCalendarDefaultView || {};
         });
 
         /**
-         * Event: Popover Refuse Button "Click"
-         *
-         * Hides the open popover element.
+         * Event: Audit Function Save Appointment Situation
          */
-         $calendarPage.on('click', '.refuse-popover', function () {
-            $(this).parents('.popover').popover('dispose');
-
+        function triggerApproveEvent(situation){
             var auditAppointment = lastFocusedEventData.data;
             var appointment = {
                 id: lastFocusedEventData.data.id,
@@ -276,7 +272,7 @@ window.BackendCalendarDefaultView = window.BackendCalendarDefaultView || {};
                 location: lastFocusedEventData.data.location,
                 notes: lastFocusedEventData.data.notes,
                 is_unavailable: false,
-                situation: 2
+                situation: situation
             };
             
             var customer = {
@@ -305,6 +301,18 @@ window.BackendCalendarDefaultView = window.BackendCalendarDefaultView || {};
 
             // Save appointment data.
             BackendCalendarApi.saveAppointment(appointment, customer, successCallback, errorCallback);
+        }
+
+        /**
+         * Event: Popover Refuse Button "Click"
+         *
+         * Hides the open popover element.
+         */
+         $calendarPage.on('click', '.refuse-popover', function () {
+            $(this).parents('.popover').popover('dispose');
+
+            var situation = 2;
+            triggerApproveEvent(situation);
         });
 
         /**
@@ -315,46 +323,8 @@ window.BackendCalendarDefaultView = window.BackendCalendarDefaultView || {};
          $calendarPage.on('click', '.pass-popover', function () {
             $(this).parents('.popover').popover('dispose');
 
-            var auditAppointment = lastFocusedEventData.data;
-            var appointment = {
-                id: lastFocusedEventData.data.id,
-                id_services: lastFocusedEventData.data.id_services,
-                id_users_provider: lastFocusedEventData.data.id_users_provider,
-                id_users_customer: lastFocusedEventData.data.customer.id,
-                start_datetime: lastFocusedEventData.data.start_datetime,
-                end_datetime: lastFocusedEventData.data.end_datetime,
-                location: lastFocusedEventData.data.location,
-                notes: lastFocusedEventData.data.notes,
-                is_unavailable: false,
-                situation: 1
-            };
-            
-            var customer = {
-                id: auditAppointment.customer.id,
-                first_name: auditAppointment.customer.first_name,
-                last_name: auditAppointment.customer.last_name,
-                email: auditAppointment.customer.email,
-                phone_number: auditAppointment.customer.phone_number,
-                address: auditAppointment.customer.address,
-                city: auditAppointment.customer.city,
-                zip_code: auditAppointment.customer.zip_code,
-                notes: auditAppointment.customer.notes
-            };
-
-            // Define success callback.
-            var successCallback = function (response) {
-                // Display success message to the user.
-                Backend.displayNotification(EALang.appointment_saved);
-                $('#select-filter-item').trigger('change');
-            };
-
-            // Define error callback.
-            var errorCallback = function () {
-                alert(EALang.service_communication_error);
-            };
-
-            // Save appointment data.
-            BackendCalendarApi.saveAppointment(appointment, customer, successCallback, errorCallback);
+            var situation = 1;
+            triggerApproveEvent(situation);
         });
 
         /**
