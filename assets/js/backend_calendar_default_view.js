@@ -258,7 +258,7 @@ window.BackendCalendarDefaultView = window.BackendCalendarDefaultView || {};
         });
 
         /**
-         * Event: Audit Function Save Appointment Situation
+         * Event: Function Aduit Appointment Situation
          */
         function triggerApproveEvent(situation){
             var auditAppointment = lastFocusedEventData.data;
