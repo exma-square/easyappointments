@@ -476,6 +476,16 @@ body {
     border-radius: 50%;
 }
 
+@media screen and (max-width: 600px) {
+    #book-appointment-wizard #logo-background img,
+    #success-frame #logo-background img {
+        width: 100px;
+    }
+    #book-appointment-wizard #header img {
+        height: 210px;
+    }
+}
+
 #success-frame #header {
     overflow: auto;
     height: 261px;
