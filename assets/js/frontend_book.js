@@ -246,10 +246,14 @@ window.FrontendBook = window.FrontendBook || {};
                 if(service.id_users == providerId){
                     var protocol = location.protocol;
                     var host = location.host;
+                    var imageUrl = (service.image && service.image.length > 0) ? 
+                        service.image :
+                        `${protocol}//${host}/assets/img/service_title.png`;
+
                     $('#serviceCard').append(`
                         <div class="service-card">
                             <div class="img-style">
-                                <img class="img-fluid" src="${protocol}//${host}/assets/img/service_title.png">
+                                <img class="img-fluid" src="${imageUrl}">
                             </div>
                             <span class="service-name">${service.name}</span>
                             <div class="word">
@@ -632,11 +636,14 @@ window.FrontendBook = window.FrontendBook || {};
         var protocol = location.protocol;
         var host = location.host;
         var targetService = GlobalVariables.availableServices.find((e) => e.id == selectServiceId);
+        var imageUrl = (targetService.image && targetService.image.length > 0) ? 
+            targetService.image :
+            `${protocol}//${host}/assets/img/service_title.png`;
 
         $(`
             <div class="service-card">
                 <div class="img-style">
-                    <img class="img-fluid" src="${protocol}//${host}/assets/img/service_title.png">
+                    <img class="img-fluid" src="${imageUrl}">
                 </div>
                 <span class="service-name">${targetService.name}</span>
                 <div class="word">

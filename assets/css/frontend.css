@@ -266,12 +266,12 @@ body {
 #book-appointment-wizard .service-card img {
     background: #E5E5E5;
     border-radius: 4px;
+    width: 100%;
 }
 
 #book-appointment-wizard .service-card .img-style {
     padding: 15px;
 }
-
 #book-appointment-wizard .service-card .service-name {
     font-weight: bold;
     font-size: 25px;
