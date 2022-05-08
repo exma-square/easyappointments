@@ -88,10 +88,34 @@
                             </div>
 
                             <div class="form-group">
+                                <label for="company-address"><?= lang('company_address') ?> *</label>
+                                <input id="company-address" data-field="company_address" class="required form-control">
+                                <span class="form-text text-muted">
+                                    <?= lang('company_address_hint') ?>
+                                </span>
+                            </div>
+
+                            <div class="form-group">
                                 <label for="company-email"><?= lang('company_email') ?> *</label>
                                 <input id="company-email" data-field="company_email" class="required form-control">
                                 <span class="form-text text-muted">
                                     <?= lang('company_email_hint') ?>
+                                </span>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="company-logo"><?= lang('company_logo') ?> *</label>
+                                <input id="company-logo" data-field="company_logo" class="form-control">
+                                <span class="form-text text-muted">
+                                    <?= lang('company_logo_hint') ?>
+                                </span>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="company-banner"><?= lang('company_banner') ?> *</label>
+                                <input id="company-banner" data-field="company_banner" class="form-control">
+                                <span class="form-text text-muted">
+                                    <?= lang('company_banner_hint') ?>
                                 </span>
                             </div>
 

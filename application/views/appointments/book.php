@@ -28,11 +28,11 @@
 
             <!-- FRAME TOP BAR -->
             <div id="logo-background">
-                <img src="<?= base_url('assets/img/logo_horizontal.png') ?>">
+                <img src="<?= $company_logo ?>">
             </div>
 
             <div id="header">
-                <img src="<?= base_url('assets/img/service_title.png') ?>">
+                <img src="<?= $company_banner ?>">
                 <span id="service-title"><?= lang('appointment_title') ?></span> 
             </div>
 

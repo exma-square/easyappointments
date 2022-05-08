@@ -44,10 +44,11 @@ body {
     text-align: center;
 }
 #book-appointment-wizard #logo-background img {
-    width: 200px;
+    width: 150px;
     height: auto;
     display: block; 
-    margin:auto;
+    margin: auto;
+    border-radius: 50%;
 }
 
 #book-appointment-wizard #header {
@@ -468,10 +469,11 @@ body {
     text-align: center;
 }
 #success-frame #logo-background img {
-    width: 200px;
+    width: 150px;
     height: auto;
     display: block; 
     margin:auto;
+    border-radius: 50%;
 }
 
 #success-frame #header {
