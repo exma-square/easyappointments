@@ -122,6 +122,7 @@ $lang['details'] = '詳細資料';
 $lang['no_records_found'] = '沒有找到記錄...';
 $lang['services'] = '服務項目管理';
 $lang['duration_minutes'] = '時長 (單位：分鐘)';
+$lang['service_image'] = '服務圖片';
 $lang['currency'] = '幣種';
 $lang['category'] = '類別';
 $lang['no_category'] = '無類別';
