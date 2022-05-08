@@ -470,8 +470,6 @@ class Appointments extends EA_Controller {
             $appointment = $post_data['appointment'];
             $customer = $post_data['customer'];
 
-            
-
             // Check appointment availability before registering it to the database.
             $appointment['id_users_provider'] = $this->check_datetime_availability();
 
@@ -519,6 +517,7 @@ class Appointments extends EA_Controller {
 
             $settings = [
                 'company_name' => $this->settings_model->get_setting('company_name'),
+                'company_address' => $this->settings_model->get_setting('company_address'),
                 'company_link' => $this->settings_model->get_setting('company_link'),
                 'company_email' => $this->settings_model->get_setting('company_email'),
                 'date_format' => $this->settings_model->get_setting('date_format'),
@@ -535,7 +534,7 @@ class Appointments extends EA_Controller {
 
 
             //send appointment line message
-            line_message_appointment($customer, $service, $appointment);
+            line_message_appointment($customer, $service, $appointment, $settings);
             
         }
         catch (Exception $exception)

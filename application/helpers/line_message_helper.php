@@ -4,7 +4,7 @@ use LINE\LINEBot\HTTPClient\CurlHTTPClient;
 use LINE\LINEBot;
 use LINE\LINEBot\MessageBuilder\RawMessageBuilder;
 
-function line_message_appointment($customer, $service, $appointment){
+function line_message_appointment($customer, $service, $appointment, $setting){
     if (!empty($customer['lineuserid'])){
         $httpClient = new \LINE\LINEBot\HTTPClient\CurlHTTPClient(config('line_access_token'));
         $bot = new \LINE\LINEBot($httpClient, ['channelSecret' => config('line_secret')]);
@@ -12,7 +12,7 @@ function line_message_appointment($customer, $service, $appointment){
         $RawMessageBuilder = new \LINE\LINEBot\MessageBuilder\RawMessageBuilder(
             [
                 'type' => 'flex',
-                'altText' => '預約服務成功訊息',
+                'altText' => '預約服務訊息',
                 'contents' => [
                     'type' => 'bubble',
                         'body' => [
@@ -21,7 +21,7 @@ function line_message_appointment($customer, $service, $appointment){
                             'contents' => [
                                 [
                                     'type' => 'text',
-                                    'text' => '預約成功',
+                                    'text' => '預約待審核',
                                     'weight' => 'bold',
                                     'color' => '#1DB446',
                                     'size' => 'sm'
@@ -142,7 +142,7 @@ function line_message_appointment($customer, $service, $appointment){
                             'contents' => [
                                 [
                                     'type' => 'text',
-                                    'text' => '注意事項，請提前 30 分鐘到場',
+                                    'text' => '預約服務審核中，如有疑問請洽店家',
                                     'size' => 'xs',
                                     'color' => '#aaaaaa',
                                     'flex' => 0
@@ -163,14 +163,19 @@ function line_message_appointment($customer, $service, $appointment){
     }
 }
 
-function line_message_change($customer, $service, $appointment){
+function line_message_change($customer, $service, $appointment, $setting){
     if(!empty($customer['lineUserId'])){
         $httpClient = new \LINE\LINEBot\HTTPClient\CurlHTTPClient(config('line_access_token'));
         $bot = new \LINE\LINEBot($httpClient, ['channelSecret' => config('line_secret')]);
-
+        $message_title = '預約服務修改成功訊息';
+        $message_result = '預約服務修改成功訊息';
+        if ($appointment['status'] == 2) {
+            $message_title = '預約服務已遭取消';
+            $message_result = '預約服務審核被拒';
+        }
         $RawMessageBuilder = new \LINE\LINEBot\MessageBuilder\RawMessageBuilder([
             'type' => 'flex',
-            'altText' => '預約服務修改成功訊息',
+            'altText' => $message_title,
             'contents' => [
                 'type' => 'bubble',
                     'body' => [
@@ -179,21 +184,21 @@ function line_message_change($customer, $service, $appointment){
                         'contents' => [
                             [
                                 'type' => 'text',
-                                'text' => '預約修改',
+                                'text' => $message_result,
                                 'weight' => 'bold',
                                 'color' => '#1DB446',
                                 'size' => 'sm'
                             ],
                             [
                                 'type' => 'text',
-                                'text' => "信程汽車",
+                                'text' => $setting['company_name'],
                                 'weight' => 'bold',
                                 'size' => 'xxl',
                                 'margin' => 'md'
                             ],
                             [
                                 'type' => 'text',
-                                'text' => "新北市八里區頂寮一街20-1號",
+                                'text' => $setting['company_address'],
                                 'size' => 'xs',
                                 'color' => '#aaaaaa',
                                 'wrap' => true
@@ -300,7 +305,7 @@ function line_message_change($customer, $service, $appointment){
                         'contents' => [
                             [
                                 'type' => 'text',
-                                'text' => '注意事項，請提前 30 分鐘到場',
+                                'text' => '預約審核通過，拒絕才會收到此訊息，如有疑問請洽店家',
                                 'size' => 'xs',
                                 'color' => '#aaaaaa',
                                 'flex' => 0
@@ -320,7 +325,7 @@ function line_message_change($customer, $service, $appointment){
     }
 }
 
-function line_message_delet($customer, $service, $appointment){
+function line_message_delete($customer, $service, $appointment, $setting){
     if(!empty($customer['lineUserId'])){
         $httpClient = new \LINE\LINEBot\HTTPClient\CurlHTTPClient(config('line_access_token'));
         $bot = new \LINE\LINEBot($httpClient, ['channelSecret' => config('line_secret')]);
@@ -343,14 +348,14 @@ function line_message_delet($customer, $service, $appointment){
                             ],
                             [
                                 'type' => 'text',
-                                'text' => "信程汽車",
+                                'text' => $setting['company_name'],
                                 'weight' => 'bold',
                                 'size' => 'xxl',
                                 'margin' => 'md'
                             ],
                             [
                                 'type' => 'text',
-                                'text' => "新北市八里區頂寮一街20-1號",
+                                'text' => $setting['company_address'],
                                 'size' => 'xs',
                                 'color' => '#aaaaaa',
                                 'wrap' => true
@@ -457,7 +462,7 @@ function line_message_delet($customer, $service, $appointment){
                         'contents' => [
                             [
                                 'type' => 'text',
-                                'text' => '注意事項，請提前 30 分鐘到場',
+                                'text' => '此項目已進行更改，如有疑問請洽店家',
                                 'size' => 'xs',
                                 'color' => '#aaaaaa',
                                 'flex' => 0
