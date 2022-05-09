@@ -127,6 +127,7 @@
                             <?= lang('service_image') ?>
                             <!-- <span class="text-danger">*</span> -->
                         </label>
+                        <input type="file" class="imgur" accept="image/*" data-max-size="5000" data-id="service-image"/>
                         <input id="service-image" class="form-control" type="text">
                     </div>
 
