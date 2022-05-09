@@ -170,7 +170,7 @@ function line_message_change($settings, $customer, $service, $appointment){
 
         $message_title = '預約服務修改成功訊息';
         $message_result = '預約服務修改成功訊息';
-        if ($appointment['status'] == 2) {
+        if ($appointment['situation'] == 2) {
             $message_title = '預約服務已遭取消';
             $message_result = '預約服務審核被拒';
         }
