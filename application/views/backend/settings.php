@@ -105,6 +105,7 @@
 
                             <div class="form-group">
                                 <label for="company-logo"><?= lang('company_logo') ?> *</label>
+                                <input type="file" class="imgur" accept="image/*" data-max-size="5000" data-id="company-logo"/>
                                 <input id="company-logo" data-field="company_logo" class="form-control">
                                 <span class="form-text text-muted">
                                     <?= lang('company_logo_hint') ?>
@@ -113,6 +114,7 @@
 
                             <div class="form-group">
                                 <label for="company-banner"><?= lang('company_banner') ?> *</label>
+                                <input type="file" class="imgur" accept="image/*" data-max-size="5000" data-id="company-banner"/>
                                 <input id="company-banner" data-field="company_banner" class="form-control">
                                 <span class="form-text text-muted">
                                     <?= lang('company_banner_hint') ?>
