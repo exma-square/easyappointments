@@ -299,6 +299,7 @@ class Backend_api extends EA_Controller {
 
             $settings = [
                 'company_name' => $this->settings_model->get_setting('company_name'),
+                'company_adddress' => $this->settings_model->get_setting('company_address'),
                 'company_link' => $this->settings_model->get_setting('company_link'),
                 'company_address' => $this->settings_model->get_setting('company_address'),
                 'company_email' => $this->settings_model->get_setting('company_email'),
@@ -312,7 +313,7 @@ class Backend_api extends EA_Controller {
             $response = AJAX_SUCCESS;
 
             //send appointment change line message
-            line_message_change($customer, $service, $appointment, $settings);
+            line_message_change($settings, $customer, $service, $appointment);
 
         }
         catch (Exception $exception)
@@ -359,6 +360,7 @@ class Backend_api extends EA_Controller {
 
             $settings = [
                 'company_name' => $this->settings_model->get_setting('company_name'),
+                'company_address' => $this->settings_model->get_setting('company_address'),
                 'company_email' => $this->settings_model->get_setting('company_email'),
                 'company_address' => $this->settings_model->get_setting('company_address'),
                 'company_link' => $this->settings_model->get_setting('company_link'),
@@ -472,7 +474,7 @@ class Backend_api extends EA_Controller {
             }
 
             //send appointment delet line message
-            line_message_delete($customer, $service, $appointment, $settings);
+            line_message_delete($settings, $customer, $service, $appointment);
 
         }
         catch (Exception $exception)
