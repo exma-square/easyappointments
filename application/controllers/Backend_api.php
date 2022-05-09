@@ -314,12 +314,6 @@ class Backend_api extends EA_Controller {
             //send appointment change line message
             line_message_change($settings, $customer, $service, $appointment);
 
-            if($appointment['situation'] == 1){
-                line_message_pass($settings, $customer, $service, $appointment);
-            }else if($appointment['situation'] == 2){
-                line_message_refuse($settings, $customer, $service, $appointment);
-            }
-
         }
         catch (Exception $exception)
         {
@@ -478,7 +472,7 @@ class Backend_api extends EA_Controller {
             }
 
             //send appointment delet line message
-            line_message_delet($settings, $customer, $service, $appointment);
+            line_message_delete($settings, $customer, $service, $appointment);
 
         }
         catch (Exception $exception)

@@ -464,15 +464,8 @@ class Appointments extends EA_Controller {
             $appointment = $post_data['appointment'];
             $customer = $post_data['customer'];
 
-            
-
             // Check appointment availability before registering it to the database.
             $appointment['id_users_provider'] = $this->check_datetime_availability();
-
-            if ( ! $appointment['id_users_provider'])
-            {
-                throw new Exception(lang('requested_hour_is_unavailable'));
-            }
 
             $provider = $this->providers_model->get_row($appointment['id_users_provider']);
             $service = $this->services_model->get_row($appointment['id_services']);
