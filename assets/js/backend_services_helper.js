@@ -331,6 +331,7 @@
         $('#service-name').val(service.name);
         $('#service-duration').val(service.duration);
         $('#service-price').val(service.price);
+        $('#service-image').val(service.image);
         $('#service-currency').val(service.currency);
         $('#service-description').val(service.description);
         $('#service-location').val(service.location);

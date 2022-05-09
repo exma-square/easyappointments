@@ -168,11 +168,13 @@ function line_message_change($settings, $customer, $service, $appointment){
         $httpClient = new \LINE\LINEBot\HTTPClient\CurlHTTPClient(config('line_access_token'));
         $bot = new \LINE\LINEBot($httpClient, ['channelSecret' => config('line_secret')]);
 
-        $message_title = '預約服務修改成功訊息';
-        $message_result = '預約服務修改成功訊息';
+        $message_title = '預約服務成功訊息';
+        $message_result = '預約服務成功訊息';
+        $message_tip = '預約成功，請提前 30 分鐘前往。';
         if ($appointment['situation'] == 2) {
             $message_title = '預約服務已遭取消';
             $message_result = '預約服務審核被拒';
+            $message_tip = '審核被拒，煩請與店家確認';
         }
 
         $RawMessageBuilder = new \LINE\LINEBot\MessageBuilder\RawMessageBuilder([
@@ -307,7 +309,7 @@ function line_message_change($settings, $customer, $service, $appointment){
                         'contents' => [
                             [
                                 'type' => 'text',
-                                'text' => '預約審核通過，拒絕才會收到此訊息，如有疑問請洽店家',
+                                'text' => $message_tip,
                                 'size' => 'xs',
                                 'color' => '#aaaaaa',
                                 'flex' => 0

@@ -44,10 +44,11 @@ body {
     text-align: center;
 }
 #book-appointment-wizard #logo-background img {
-    width: 200px;
+    width: 150px;
     height: auto;
     display: block; 
-    margin:auto;
+    margin: auto;
+    border-radius: 50%;
 }
 
 #book-appointment-wizard #header {
@@ -266,12 +267,12 @@ body {
 #book-appointment-wizard .service-card img {
     background: #E5E5E5;
     border-radius: 4px;
+    width: 100%;
 }
 
 #book-appointment-wizard .service-card .img-style {
     padding: 15px;
 }
-
 #book-appointment-wizard .service-card .service-name {
     font-weight: bold;
     font-size: 25px;
@@ -468,10 +469,21 @@ body {
     text-align: center;
 }
 #success-frame #logo-background img {
-    width: 200px;
+    width: 150px;
     height: auto;
     display: block; 
     margin:auto;
+    border-radius: 50%;
+}
+
+@media screen and (max-width: 600px) {
+    #book-appointment-wizard #logo-background img,
+    #success-frame #logo-background img {
+        width: 100px;
+    }
+    #book-appointment-wizard #header img {
+        height: 210px;
+    }
 }
 
 #success-frame #header {

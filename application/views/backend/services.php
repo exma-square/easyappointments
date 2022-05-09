@@ -122,6 +122,14 @@
                         <input id="service-price" class="form-control required">
                     </div>
 
+                    <div class="form-group">
+                        <label for="service-image">
+                            <?= lang('service_image') ?>
+                            <!-- <span class="text-danger">*</span> -->
+                        </label>
+                        <input id="service-image" class="form-control" type="text">
+                    </div>
+
                     <div class="form-group hidden">
                         <label for="service-currency">
                             <?= lang('currency') ?>
