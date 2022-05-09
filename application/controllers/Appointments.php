@@ -473,11 +473,6 @@ class Appointments extends EA_Controller {
             // Check appointment availability before registering it to the database.
             $appointment['id_users_provider'] = $this->check_datetime_availability();
 
-            if ( ! $appointment['id_users_provider'])
-            {
-                throw new Exception(lang('requested_hour_is_unavailable'));
-            }
-
             $provider = $this->providers_model->get_row($appointment['id_users_provider']);
             $service = $this->services_model->get_row($appointment['id_services']);
 
@@ -532,13 +527,10 @@ class Appointments extends EA_Controller {
                 'appointment_hash' => $appointment['hash']
             ];
 
-
             //send appointment line message
-            line_message_appointment($customer, $service, $appointment, $settings);
-            
-        }
-        catch (Exception $exception)
-        {
+            line_message_appointment($settings, $customer, $service, $appointment);
+
+        } catch (Exception $exception) {
             $this->output->set_status_header(500);
 
             $response = [
