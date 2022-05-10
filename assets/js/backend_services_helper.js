@@ -133,6 +133,7 @@
             var service = {
                 name: $('#service-name').val(),
                 duration: $('#service-duration').val(),
+                image: $('#service-image').val(),
                 price: $('#service-price').val(),
                 currency: $('#service-currency').val(),
                 description: $('#service-description').val(),
@@ -195,6 +196,58 @@
             GeneralFunctions.displayMessageBox(EALang.delete_service,
                 EALang.delete_record_prompt, buttons);
         });
+
+            /**
+         * Event: File Change to Upload image and Get imgurl
+         */
+     $('input[type=file]').on("change", function () {
+
+        var imgurlId = $(this).attr('data-id');
+        var $files = $(this).get(0).files;
+
+        if ($files.length) {
+
+            // Reject big files
+            if ($files[0].size > $(this).data("max-size") * 1024) {
+                console.log("Please select a smaller file");
+                return false;
+            }
+
+            // Replace ctrlq with your own API key
+            var apiUrl = 'https://api.imgur.com/3/image';
+            var apiKey = 'f9e328aab791de5';
+
+            var formData = new FormData();
+            formData.append("image", $files[0]);
+
+            var settings = {
+                "async": true,
+                "crossDomain": true,
+                "url": apiUrl,
+                "method": "POST",
+                "datatype": "json",
+                "headers": {
+                    "Authorization": "Client-ID " + apiKey
+                },
+                "processData": false,
+                "contentType": false,
+                "data": formData,
+                beforeSend: function (xhr) {
+                    console.log("Uploading | 上傳中");
+                },
+                success: function (res) {
+                    console.log(res.data.link);
+                    $('#' + imgurlId).val(res.data.link);
+                },
+                error: function () {
+                    alert("Failed | 上傳失敗");
+                }
+            }
+            $.ajax(settings).done(function (response) {
+                console.log("Done | 成功");
+            });
+        }
+    });
     };
 
     /**
