@@ -207,7 +207,7 @@ window.BackendCalendarAppointmentsModal = window.BackendCalendarAppointmentsModa
                 GlobalVariables.customers.forEach(function (customer) {
                     $('<div/>', {
                         'data-id': customer.id,
-                        'text': customer.first_name + ' ' + customer.last_name
+                        'text': customer.first_name + ' ' + customer.last_name + ' ' +(customer.lineUserId ? '(LINE)' : '')
                     })
                         .appendTo($list);
                 });

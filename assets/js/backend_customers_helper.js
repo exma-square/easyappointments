@@ -386,7 +386,7 @@
                 this.filterResults = response;
 
                 $('#filter-customers .results').empty();
-
+                
                 response.forEach(function (customer) {
                     $('#filter-customers .results')
                         .append(this.getFilterHtml(customer))
@@ -432,21 +432,28 @@
         var info = customer.email;
 
         info = customer.phone_number ? info + ', ' + customer.phone_number : info;
-
-        return $('<div/>', {
-            'class': 'customer-row entry',
-            'data-id': customer.id,
-            'html': [
-                $('<strong/>', {
-                    'text': name
-                }),
-                $('<br/>'),
-                $('<span/>', {
-                    'text': info
-                }),
-                $('<br/>'),
-            ]
-        });
+        
+        var isLineUser = customer.lineUserId;
+        
+            return $('<div/>', {
+                'class': 'customer-row entry',
+                'data-id': customer.id,
+                'html': [
+                    $('<strong/>', {
+                        'text': name
+                    }),
+                    $('<br/>'),
+                    $('<span/>', {
+                        'text': info
+                    }),
+                    $('<br/>'),
+                    $('<span/>', {
+                        'class': (isLineUser ? 'link-mark' : ''),
+                        'text': (isLineUser ? 'LINE' : '')
+                    }),
+                    $('<br/>'),
+                ]
+            });
     };
 
     /**
