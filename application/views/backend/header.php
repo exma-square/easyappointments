@@ -41,8 +41,8 @@
 <nav id="header" class="navbar navbar-expand-md navbar-dark">
     <div id="header-logo" class="navbar-brand">
         <img src="<?= base_url('assets/img/logo.png') ?>">
-        <h6>Car2dude</h6>
-        <small>車輛保養維修最佳夥伴</small>
+        <h6><?= $chinese_name ?></h6>
+        <small><?= $description ?></small>
     </div>
 
     <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#header-menu">
