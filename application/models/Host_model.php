@@ -2,67 +2,49 @@
 
 class Host_model extends EA_Model {
 
-    public function get_host($chinese_name)
+    public function get_host($name)
     {
-        if ( ! is_string($chinese_name))
+        if ( ! is_string($name))
         {
             // Check argument type.
-            throw new Exception('$chinese_name argument is not a string: ' . $chinese_name);
+            throw new Exception('$name argument is not a string: ' . $name);
         }
 
-        if ($this->db->get_where('host', ['chinese_name' => $chinese_name])->num_rows() == 0)
+        if ($this->db->get_where('host', ['name' => $name])->num_rows() == 0)
         {
-            // Check if setting exists in db.
-            throw new Exception('$chinese_name host does not exist in database: ' . $chinese_name);
+            // Check if host exists in db.
+            throw new Exception('$name host does not exist in database: ' . $name);
         }
 
-        $query = $this->db->get_where('host', ['chinese_name' => $chinese_name]);
+        $query = $this->db->get_where('host', ['name' => $name]);
         $host = $query->num_rows() > 0 ? $query->row() : '';
-        $data = [
-            'chinese_name' => $chinese_name,
-            'english_name' => $english_name,
-            'url' => $url,
-            'logo' => $logo,
-            'description' => $description,
-            'main_color' => $main_color,
-            'secondary_color' => $secondary_color,
-            'text_color' => $text_color
-        ];
-        return $host -> $data;
+        return $host->value;
     }
 
-    public function set_host($chinese_name, $english_name, $url, $logo, $description, $main_color, $secondary_color, $text_color)
+    public function set_host($name, $value)
     {
-        if ( ! is_string($chinese_name))
+        if ( ! is_string($name))
         {
-            throw new Exception('$chinese_name argument is not a string: ' . $chinese_name);
+            throw new Exception('$name argument is not a string: ' . $name);
         }
 
-        $query = $this->db->get_where('host', ['chinese_name' => $chinese_name]);
+        $query = $this->db->get_where('host', ['name' => $name]);
 
         if ($query->num_rows() > 0)
         {
-            // Update setting
-            if ( ! $this->db->update('host', ['text_color' => $text_color], ['secondary_color' => $secondary_color], 
-                                            ['main_color' => $main_color], ['description' => $description], ['logo' => $logo], 
-                                            ['url' => $url], ['english_name' => $english_name], ['chinese_name' => $chinese_name]))
+            // Update host
+            if ( ! $this->db->update('host', ['value' => $value], ['name' => $name]))
             {
                 throw new Exception('Could not update database host.');
             }
-            $host_id = (int)$this->db->get_where('host', ['chinese_name' => $$chinese_name])->row()->id;
+            $host_id = (int)$this->db->get_where('host', ['name' => $name])->row()->id;
         }
         else
         {
-            // Insert setting
+            // Insert host
             $insert_data = [
-                'chinese_name' => $chinese_name,
-                'english_name' => $english_name,
-                'url' => $url,
-                'logo' => $logo,
-                'description' => $description,
-                'main_color' => $main_color,
-                'secondary_color' => $secondary_color,
-                'text_color' => $text_color
+                'name' => $name,
+                'value' => $value
             ];
 
             if ( ! $this->db->insert('host', $insert_data))
@@ -78,6 +60,6 @@ class Host_model extends EA_Model {
 
     public function get_hosts()
     {
-        return $this->db->get('host')->result_array();
+        return $this->db->get('hosts')->result_array();
     }
 }
