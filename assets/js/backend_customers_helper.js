@@ -433,27 +433,27 @@
 
         info = customer.phone_number ? info + ', ' + customer.phone_number : info;
         
-        var isLineUser = customer.lineUserId;
+        var isLineUser = customer.lineUserId && customer.lineUserId.length >= 0;
         
-            return $('<div/>', {
-                'class': 'customer-row entry',
-                'data-id': customer.id,
-                'html': [
-                    $('<strong/>', {
-                        'text': name
-                    }),
-                    $('<br/>'),
-                    $('<span/>', {
-                        'text': info
-                    }),
-                    $('<br/>'),
-                    $('<span/>', {
-                        'class': (isLineUser ? 'link-mark' : ''),
-                        'text': (isLineUser ? 'LINE' : '')
-                    }),
-                    $('<br/>'),
-                ]
-            });
+        return $('<div/>', {
+            'class': 'customer-row entry',
+            'data-id': customer.id,
+            'html': [
+                $('<strong/>', {
+                    'text': name
+                }),
+                $('<br/>'),
+                $('<span/>', {
+                    'text': info
+                }),
+                $('<br/>'),
+                $('<span/>', {
+                    'class': (isLineUser ? 'link-mark' : ''),
+                    'text': (isLineUser ? 'LINE' : '')
+                }),
+                $('<br/>'),
+            ]
+        });
     };
 
     /**
