@@ -930,4 +930,13 @@ body .form-horizontal .controls {
     top: -30px;
     right: 15px;
 }
-
+.link-mark {
+    position: relative;
+    bottom: 50px;
+    left: 255px;
+    color: #ffffff;
+    background: #00DB00;
+    border-radius: 10px;
+    width: 50px;
+    padding: 0px 8px;
+}
