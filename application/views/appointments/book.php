@@ -354,7 +354,7 @@
                 <small>
                     <span class="footer-powered-by">
                         Copyright
-                        <a href="https://easyappointments.org" target="_blank"> © 2020 車友趣</a>
+                        <a href="<?= $url?>" target="_blank"> © 2020 車友趣</a>
                         All rights reserved.
                     </span>
 
