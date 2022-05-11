@@ -256,6 +256,7 @@ body legend {
 
 .backend-page .filter-records .results .entry {
     padding: 10px 7px;
+    position: relative;
 }
 
 .backend-page .filter-records .results .entry:hover:not(.selected) {
@@ -930,4 +931,16 @@ body .form-horizontal .controls {
     top: -30px;
     right: 15px;
 }
-
+.link-mark.line {
+    text-align: center;
+    position: absolute;
+    top: 5px;
+    right: 15px;
+    color: #ffffff;
+    background: #00DB00;
+    border-radius: 10px;
+    width: 40px;
+    padding: 0px 5px;
+    display: inline-block;
+    font-size: 10px;
+}
