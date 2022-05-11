@@ -448,7 +448,7 @@
                 }),
                 $('<br/>'),
                 $('<span/>', {
-                    'class': (isLineUser ? 'link-mark' : ''),
+                    'class': (isLineUser ? 'link-mark line' : ''),
                     'text': (isLineUser ? 'LINE' : '')
                 }),
                 $('<br/>'),
