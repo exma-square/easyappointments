@@ -34,6 +34,7 @@ class Backend extends EA_Controller {
         $this->load->model('roles_model');
         $this->load->model('user_model');
         $this->load->model('secretaries_model');
+        $this->load->model('host_model');
         $this->load->model('admins_model');
         $this->load->library('timezones');
         $this->load->library('migration');
@@ -79,6 +80,14 @@ class Backend extends EA_Controller {
         $view['customers'] = $this->customers_model->get_batch();
         $view['calendar_view'] = ! empty($calendar_view_query_param) ? $calendar_view_query_param : $user['settings']['calendar_view'];
         $view['timezones'] = $this->timezones->to_array();
+        $view['chinese_name'] = $this->host_model->get_host('chinese_name');
+        $view['english_name'] = $this->host_model->get_host('english_name');
+        $view['url'] = $this->host_model->get_host('url');
+        $view['logo'] = $this->host_model->get_host('logo');
+        $view['description'] = $this->host_model->get_host('description');
+        $view['main_color'] = $this->host_model->get_host('main_color');
+        $view['secondary_color'] = $this->host_model->get_host('secondary_color');
+        $view['text_color'] = $this->host_model->get_host('text_color');
         $this->set_user_data($view);
 
         if ($this->session->userdata('role_slug') === DB_SLUG_SECRETARY)
@@ -199,6 +208,14 @@ class Backend extends EA_Controller {
         $view['available_providers'] = $this->providers_model->get_available_providers();
         $view['available_services'] = $this->services_model->get_available_services();
         $view['timezones'] = $this->timezones->to_array();
+        $view['chinese_name'] = $this->host_model->get_host('chinese_name');
+        $view['english_name'] = $this->host_model->get_host('english_name');
+        $view['url'] = $this->host_model->get_host('url');
+        $view['logo'] = $this->host_model->get_host('logo');
+        $view['description'] = $this->host_model->get_host('description');
+        $view['main_color'] = $this->host_model->get_host('main_color');
+        $view['secondary_color'] = $this->host_model->get_host('secondary_color');
+        $view['text_color'] = $this->host_model->get_host('text_color');
 
         if ($this->session->userdata('role_slug') === DB_SLUG_SECRETARY)
         {
@@ -245,6 +262,14 @@ class Backend extends EA_Controller {
         $view['services'] = $this->services_model->get_batch();
         $view['categories'] = $this->services_model->get_all_categories();
         $view['timezones'] = $this->timezones->to_array();
+        $view['chinese_name'] = $this->host_model->get_host('chinese_name');
+        $view['english_name'] = $this->host_model->get_host('english_name');
+        $view['url'] = $this->host_model->get_host('url');
+        $view['logo'] = $this->host_model->get_host('logo');
+        $view['description'] = $this->host_model->get_host('description');
+        $view['main_color'] = $this->host_model->get_host('main_color');
+        $view['secondary_color'] = $this->host_model->get_host('secondary_color');
+        $view['text_color'] = $this->host_model->get_host('text_color');
         $this->set_user_data($view);
 
         $this->load->view('backend/header', $view);
@@ -282,6 +307,14 @@ class Backend extends EA_Controller {
         $view['working_plan'] = $this->settings_model->get_setting('company_working_plan');
         $view['timezones'] = $this->timezones->to_array();
         $view['working_plan_exceptions'] = '{}';
+        $view['chinese_name'] = $this->host_model->get_host('chinese_name');
+        $view['english_name'] = $this->host_model->get_host('english_name');
+        $view['url'] = $this->host_model->get_host('url');
+        $view['logo'] = $this->host_model->get_host('logo');
+        $view['description'] = $this->host_model->get_host('description');
+        $view['main_color'] = $this->host_model->get_host('main_color');
+        $view['secondary_color'] = $this->host_model->get_host('secondary_color');
+        $view['text_color'] = $this->host_model->get_host('text_color');
         $this->set_user_data($view);
 
         $this->load->view('backend/header', $view);
@@ -319,6 +352,14 @@ class Backend extends EA_Controller {
         $view['system_settings'] = $this->settings_model->get_settings();
         $view['user_settings'] = $this->user_model->get_user($user_id);
         $view['timezones'] = $this->timezones->to_array();
+        $view['chinese_name'] = $this->host_model->get_host('chinese_name');
+        $view['english_name'] = $this->host_model->get_host('english_name');
+        $view['url'] = $this->host_model->get_host('url');
+        $view['logo'] = $this->host_model->get_host('logo');
+        $view['description'] = $this->host_model->get_host('description');
+        $view['main_color'] = $this->host_model->get_host('main_color');
+        $view['secondary_color'] = $this->host_model->get_host('secondary_color');
+        $view['text_color'] = $this->host_model->get_host('text_color');
 
         // book_advance_timeout preview
         $book_advance_timeout = $this->settings_model->get_setting('book_advance_timeout');
