@@ -1,7 +1,7 @@
 <div id="footer">
     <div id="footer-content" class="col-12 col-sm-8" style="background: <?= $main_color ?>">
         Copyright 
-        <a href="<?= $url ?>" target="_blank"> © 2020 車友趣</a>
+        <a href="<?= $url ?>" target="_blank"> © 2020 <?= $chinese_name ?></a>
         All rights reserved.
     </div>
 

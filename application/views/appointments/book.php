@@ -355,7 +355,7 @@
                 <small>
                     <span class="footer-powered-by">
                         Copyright
-                        <a href="<?= $url ?>" target="_blank"> © 2020 車友趣</a>
+                        <a href="<?= $url ?>" target="_blank"> © 2020 <?= $chinese_name ?></a>
                         All rights reserved.
                     </span>
 
