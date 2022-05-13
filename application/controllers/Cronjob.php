@@ -31,7 +31,7 @@ class Cronjob extends EA_Controller {
                 $provider = $this->providers_model->get_row($appointment['id_users_provider']);
                 $service = $this->services_model->get_row($appointment['id_services']);
                 $customer = $this->customers_model->get_row($appointment['id_users_customer']);
-                line_message_cronjob($setting, $provider, $service, $customer);
+                line_message_cronjob($setting, $provider, $service, $customer, $appointment);
             }
         }
 
