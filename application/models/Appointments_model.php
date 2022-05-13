@@ -602,4 +602,25 @@ class Appointments_model extends EA_Model {
             ->row()
             ->attendants_number;
     }
+
+    public function get_datetime($day_start, $day_end)
+    {
+ 
+        $today = date("Y-m-d");
+        
+        $interval_start = date("Y-m-d", strtotime($today) + $day_start * 24 * 3600);
+        $interval_end = date("Y-m-d", strtotime($today) + $day_end * 24 * 3600);
+        
+        return (int)$this->db
+                    ->select('count(*) AS datetime')
+                    ->from('appointments')
+                    ->group_start()
+                    ->group_start()
+                    ->where('start_datetime >=', $interval_start)
+                    ->where('start_datetime <=', $interval_end)
+                    ->get()
+                    ->row()
+                    ->$row_data;
+
+    }
 }

@@ -1,6 +1,6 @@
 <?php defined('BASEPATH') or exit('No direct script access allowed');
 
-class cronjobController extends EA_Controller {
+class Cronjob extends EA_Controller {
 
     public function __construct()
     {
@@ -17,17 +17,10 @@ class cronjobController extends EA_Controller {
 
     public function send_notify_to_appoiment()
     {
-        $today = strtotime(date("Y-m-d")); 
-        $start_datetime = $this->appointments_model->get_value('start_datetime', $appointment['id']);
-        
         $remind_time = $this->settings_model->get_setting('remind_time');
-
-        $result = floor((strtotime($start_datetime) - $today) / 3600 / 24);
-
-        if($result == $remind_time)
-        {
-            line_message_change($settings, $customer, $service, $appointment);
-        }
-        
+        $day_start = $remind_time;
+        $day_end = $remind_time +1;
+        $datetime = $this->appointments_model->get_datetime($day_start, $day_end);
+        // echo json_encode($datetime);
     }
 }
