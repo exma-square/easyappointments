@@ -16,7 +16,8 @@ class Cronjob extends EA_Controller {
     }
 
     public function send_notify_to_appoiment()
-    {
+    {   
+        $appointment = [];
         $remind_time = $this->settings_model->get_setting('remind_time');
         $day_start = $remind_time;
         $day_end = $remind_time +1;
@@ -34,7 +35,6 @@ class Cronjob extends EA_Controller {
                 line_message_cronjob($settings, $provider, $service, $customer, $appointment);
             }
         }
-
         print_r($appointments);
         // echo json_encode($datetime);
     }
