@@ -28,7 +28,7 @@ class Cronjob extends EA_Controller {
                 'company_name' => $this->settings_model->get_setting('company_name'),
                 'company_address' => $this->settings_model->get_setting('company_address'),
             ];
-            foreach ($appointment as $appointments) {
+            foreach ($appointments as $appointment) {
                 $provider = $this->providers_model->get_row($appointment['id_users_provider']);
                 $service = $this->services_model->get_row($appointment['id_services']);
                 $customer = $this->customers_model->get_row($appointment['id_users_customer']);
