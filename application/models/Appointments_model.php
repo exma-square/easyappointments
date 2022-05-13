@@ -603,7 +603,7 @@ class Appointments_model extends EA_Model {
             ->attendants_number;
     }
 
-    public function get_datetime($day_start, $day_end)
+    public function get_scheduled_appointments($day_start, $day_end)
     {
  
         $today = date("Y-m-d");

@@ -20,8 +20,8 @@ class Cronjob extends EA_Controller {
         $remind_time = $this->settings_model->get_setting('remind_time');
         $day_start = $remind_time;
         $day_end = $remind_time +1;
-        $datetime = $this->appointments_model->get_datetime($day_start, $day_end);
-        print_r($datetime);
+        $appointments = $this->appointments_model->get_scheduled_appointments($day_start, $day_end);
+        print_r($appointments);
         // echo json_encode($datetime);
     }
 }
