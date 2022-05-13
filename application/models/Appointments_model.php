@@ -611,16 +611,15 @@ class Appointments_model extends EA_Model {
         $interval_start = date("Y-m-d", strtotime($today) + $day_start * 24 * 3600);
         $interval_end = date("Y-m-d", strtotime($today) + $day_end * 24 * 3600);
         
-        return (int)$this->db
-                    ->select('count(*) AS datetime')
-                    ->from('appointments')
-                    ->group_start()
-                    ->group_start()
-                    ->where('start_datetime >=', $interval_start)
-                    ->where('start_datetime <=', $interval_end)
-                    ->get()
-                    ->row()
-                    ->$row_data;
+        $result = $this->db
+        ->get_where('appointments',[
+            'start_datetime >=' =>  $interval_start . " 00:00:00",
+            'start_datetime <=' => $interval_end . " 00:00:00",
+            'situation' => 1,
+        ])->result_array();
+        // $sql = $this->db->last_query();
+        // echo $sql;
+        return $result;
 
     }
 }
