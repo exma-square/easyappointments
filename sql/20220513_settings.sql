@@ -1,0 +1,1 @@
+INSERT INTO `ea_host` (`id`, `name`, `value`) VALUES ('24', 'remind_time', '1');
