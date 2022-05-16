@@ -35,10 +35,19 @@ window.BackendCalendarApi = window.BackendCalendarApi || {};
      */
     exports.saveAppointment = function (appointment, customer, successCallback, errorCallback) {
         var url = GlobalVariables.baseUrl + '/index.php/backend_api/ajax_save_appointment';
-
+        
+        var variable = variable || 1;
+        if (confirm("是否要傳送line-message給客戶？")) {
+            alert('已傳送！');
+        } else {
+            alert('已取消傳送！');
+            variable = 0;
+        }
+        
         var data = {
             csrfToken: GlobalVariables.csrfToken,
-            appointment_data: JSON.stringify(appointment)
+            appointment_data: JSON.stringify(appointment),
+            variable: variable,
         };
 
         if (customer) {
