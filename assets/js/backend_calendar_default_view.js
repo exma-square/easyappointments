@@ -211,12 +211,12 @@ window.BackendCalendarDefaultView = window.BackendCalendarDefaultView || {};
                         text: 'OK',
                         click: function () {
 
-                            var variable = variable || 1;
+                            var is_notification = is_notification || 1;
                             if (confirm("是否要傳送line-message給客戶？")) {
                                 alert('已傳送！');
                             } else {
                                 alert('已取消傳送！');
-                                variable = 0;
+                                is_notification = 0;
                             }
 
                             url = GlobalVariables.baseUrl + '/index.php/backend_api/ajax_delete_appointment';
@@ -225,7 +225,7 @@ window.BackendCalendarDefaultView = window.BackendCalendarDefaultView || {};
                                 csrfToken: GlobalVariables.csrfToken,
                                 appointment_id: lastFocusedEventData.data.id,
                                 delete_reason: $('#delete-reason').val(),
-                                variable: variable,
+                                is_notification: is_notification,
                             };
 
                             $.post(url, data)

@@ -313,8 +313,8 @@ class Backend_api extends EA_Controller {
             $response = AJAX_SUCCESS;
 
             //send appointment change line message
-            $variable = $this->input->post('variable');
-            if($variable == 1){
+            $is_notification = $this->input->post('is_notification');
+            if($is_notification == 1){
                 line_message_change($settings, $customer, $service, $appointment);
             }
 
@@ -477,8 +477,8 @@ class Backend_api extends EA_Controller {
             }
 
             //send appointment delet line message
-            $variable = $this->input->post('variable');
-            if($variable == 1){
+            $is_notification = $this->input->post('is_notification');
+            if($is_notification == 1){
                 line_message_delete($settings, $customer, $service, $appointment);
             }
 
