@@ -1,0 +1,1 @@
+INSERT INTO `ea_settings` (`id`, `name`, `value`) VALUES ('24', 'remind_time', '3');

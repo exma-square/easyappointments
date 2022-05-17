@@ -128,6 +128,15 @@
                                     <?= lang('company_link_hint') ?>
                                 </span>
                             </div>
+
+                            <div class="form-group">
+                                <label for="remind-time"><?= lang('remind_time') ?> </label>
+                                <input id="remind-time" data-field="remind_time" class="required form-control">
+                                <span class="form-text text-muted">
+                                    <?= lang('remind_time_hint') ?>
+                                </span>
+                            </div>
+
                             <div class="form-group hidden">
                                 <label for="date-format">
                                     <?= lang('date_format') ?>

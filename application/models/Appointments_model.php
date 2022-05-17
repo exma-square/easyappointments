@@ -602,4 +602,24 @@ class Appointments_model extends EA_Model {
             ->row()
             ->attendants_number;
     }
+
+    public function get_scheduled_appointments($day_start, $day_end)
+    {
+ 
+        $today = date("Y-m-d");
+        
+        $interval_start = date("Y-m-d", strtotime($today) + $day_start * 24 * 3600);
+        $interval_end = date("Y-m-d", strtotime($today) + $day_end * 24 * 3600);
+        
+        $result = $this->db
+        ->get_where('appointments',[
+            'start_datetime >=' =>  $interval_start . " 00:00:00",
+            'start_datetime <=' => $interval_end . " 00:00:00",
+            'situation' => 1,
+        ])->result_array();
+        // $sql = $this->db->last_query();
+        // echo $sql;
+        return $result;
+
+    }
 }
