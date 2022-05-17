@@ -348,15 +348,23 @@ window.FrontendBookApi = window.FrontendBookApi || {};
     /**
      * 
      */
-    exports.getCustomerData = function (customer){
-        var url = GlobalVariables.baseUrl + '/index.php/customer/send_customerData_to_appoiment';
+    exports.getCustomerData = function (lineUserId){
+        var url = GlobalVariables.baseUrl + '/index.php/customer/send_customer_to_appoiment';
         var data = {
             csrfToken: GlobalVariables.csrfToken,
-            customer_data: JSON.stringify(customer),
-        }
+            lineUserId: lineUserId,
+        };
+
+        // ajax
         $.post(url, data)
-            .done(function () {
-                
+            .done(function (response) {
+                if (response) {
+
+                    $('#first-name').val(response.first_name);
+                    $('#last-name').val(response.last_name);
+                    $('#phone-number').val(response.phone_number);
+                    $('#email').val(response.email);
+                }
             });
 
     }

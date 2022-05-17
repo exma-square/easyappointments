@@ -384,7 +384,7 @@ class Customers_model extends EA_Model {
     /**
      * Get have lineUserId customers  from the database.
      */
-    public function get_have_lineUserId_row($lineUserId)
+    public function get_data_from_line_id($lineUserId)
     {
         $result = $this->db->get_where('users',['lineUserId' => $lineUserId])->row_array();
         return $result;

@@ -56,7 +56,7 @@ window.FrontendBook = window.FrontendBook || {};
     exports.initialize = function (defaultEventHandlers, manageMode) {
         defaultEventHandlers = defaultEventHandlers || true;
         manageMode = manageMode || false;
-
+        
         liff
         .init({ liffId: GlobalVariables.lineLiff })
         .then(() => {
@@ -70,6 +70,7 @@ window.FrontendBook = window.FrontendBook || {};
                 $('#lineuserid').val(userid);
                 $('#first-name').val(firstName);
                 $('#last-name').val(lastName);
+                FrontendBookApi.getCustomerData(userid);
             })
             .catch((err) => {
                 // alert('error');
@@ -201,23 +202,6 @@ window.FrontendBook = window.FrontendBook || {};
 
         }
     };
-    
-    /**
-     * 
-     */
-    function triggerCheckEvent(lineUserId){
-        var checkLineUserId = lastFocusedEventData.data;
-
-        var customer = {
-            id: checkLineUserId.customer.id,
-            first_name: checkLineUserId.customer.first_name,
-            last_name: checkLineUserId.customer.last_name,
-            phone_number: checkLineUserId.customer.phone_number,
-            lineUserId: lineUserId,
-        };
-        
-        FrontendBookApi.getCustomerData(customer);
-    }
 
     /**
      * This method binds the necessary event handlers for the book appointments page.

@@ -6,20 +6,26 @@ class Customer extends EA_Controller {
     {
         parent::__construct();
 
-        $this->load->helper('line_message');
-        $this->load->model('appointments_model');
-        $this->load->model('providers_model');
-        $this->load->model('services_model');
         $this->load->model('customers_model');
-        $this->load->model('settings_model');
-        $this->load->library('timezones');
     }
 
-    public function send_customerData_to_appoiment()
+    public function send_customer_to_appoiment()
     {   
-        $lineUserId = 'U6260f39e480af845875270a10dfcc9e7';
-        $lineUserId_customerData = $this->customers_model->get_have_lineUserId_row($lineUserId);
+        $lineUserId = $this->input->post('lineUserId');
+        
+        if (empty($lineUserId))
+        {
+            $response = ['warnings' => 'Error line user id is required'];
+        }
+        else
+        {
+            $lineUserId_customerData = $this->customers_model->get_data_from_line_id($lineUserId);
+            $response = $lineUserId_customerData; 
+        }
 
-        print_r($lineUserId_customerData);
+        $this->output
+            ->set_content_type('application/json')
+            ->set_output(json_encode($response));          
+        
     }
 }
