@@ -380,4 +380,14 @@ class Customers_model extends EA_Model {
     {
         return $this->db->get_where('roles', ['slug' => DB_SLUG_CUSTOMER])->row()->id;
     }
+
+    /**
+     * Get have lineUserId customers  from the database.
+     */
+    public function get_have_lineUserId_row($lineUserId)
+    {
+        $result = $this->db->get_where('users',['lineUserId' => $lineUserId])->row_array();
+        return $result;
+    }
+
 }
