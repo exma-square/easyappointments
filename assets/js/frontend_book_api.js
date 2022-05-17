@@ -345,4 +345,20 @@ window.FrontendBookApi = window.FrontendBookApi || {};
             });
     };
 
+    /**
+     * 
+     */
+    exports.getCustomerData = function (customer){
+        var url = GlobalVariables.baseUrl + '/index.php/customer/send_customerData_to_appoiment';
+        var data = {
+            csrfToken: GlobalVariables.csrfToken,
+            customer_data: JSON.stringify(customer),
+        }
+        $.post(url, data)
+            .done(function () {
+                
+            });
+
+    }
+
 })(window.FrontendBookApi);

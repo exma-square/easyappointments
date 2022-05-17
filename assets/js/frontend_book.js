@@ -201,6 +201,23 @@ window.FrontendBook = window.FrontendBook || {};
 
         }
     };
+    
+    /**
+     * 
+     */
+    function triggerCheckEvent(lineUserId){
+        var checkLineUserId = lastFocusedEventData.data;
+
+        var customer = {
+            id: checkLineUserId.customer.id,
+            first_name: checkLineUserId.customer.first_name,
+            last_name: checkLineUserId.customer.last_name,
+            phone_number: checkLineUserId.customer.phone_number,
+            lineUserId: lineUserId,
+        };
+        
+        FrontendBookApi.getCustomerData(customer);
+    }
 
     /**
      * This method binds the necessary event handlers for the book appointments page.
