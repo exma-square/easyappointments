@@ -23,17 +23,19 @@ class Record extends EA_Controller {
         }
         else
         {
-            $appointment = [];
             $customer_id = $this->customers_model->get_value_from_line_id('id', $lineUserId);
             $appointments = $this->appointments_model->get_appointments_from_customer($customer_id);
 
-            $response = $appointments; 
-
+            foreach($appointments as $id_services => $appointments)
+            {
+                $service = $this->services_model->get_row($appointments['id_services']);
+                $appointments['id_services'] = $service['name'];
+                $response[] = $appointments;
+            }
         }
 
         $this->output
             ->set_content_type('application/json')
             ->set_output(json_encode($response));  
-
     }
 }
