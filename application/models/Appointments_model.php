@@ -603,6 +603,9 @@ class Appointments_model extends EA_Model {
             ->attendants_number;
     }
 
+    /**
+     * 
+     */
     public function get_scheduled_appointments($day_start, $day_end)
     {
  
@@ -622,4 +625,15 @@ class Appointments_model extends EA_Model {
         return $result;
 
     }
+
+    /**
+     * 
+     */
+    public function get_appointments_from_customer($customer_id)
+    {
+        $result = $this->db->get_where('appointments', ['id_users_customer' => $customer_id])->result_array();
+
+        return $result;
+    }
+
 }
