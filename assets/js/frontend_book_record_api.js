@@ -22,7 +22,7 @@ window.FrontendBookRecordApi = window.FrontendBookRecordApi || {};
                                     <td>${response.book_datetime}</td>
                                     <td>${response.start_datetime} - ${response.end_datetime.replace(/^\d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])\s/ig, '')}</td>
                                     <td>${response.id_services}</td>
-                                    <td>${response.situation}</td>
+                                    <td>${response.situation == 1 ? '審核通過' : '待審核'}</td>
                                 </tr> `;
                     });
                     $('.table tbody').html(html);
