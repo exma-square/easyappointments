@@ -728,6 +728,9 @@ class Appointments extends EA_Controller {
         return $provider_list;
     }
 
+    /**
+     * 
+     */
     public function book_record()
     {
         try
@@ -736,18 +739,6 @@ class Appointments extends EA_Controller {
             $company_address = $this->settings_model->get_setting('company_address');
             $company_logo = $this->settings_model->get_setting('company_logo');
             $company_banner = $this->settings_model->get_setting('company_banner');
-            $book_advance_timeout = $this->settings_model->get_setting('book_advance_timeout');
-            $date_format = $this->settings_model->get_setting('date_format');
-            $time_format = $this->settings_model->get_setting('time_format');
-            $first_weekday = $this->settings_model->get_setting('first_weekday');
-            $require_phone_number = $this->settings_model->get_setting('require_phone_number');
-            $display_cookie_notice = $this->settings_model->get_setting('display_cookie_notice');
-            $cookie_notice_content = $this->settings_model->get_setting('cookie_notice_content');
-            $display_terms_and_conditions = $this->settings_model->get_setting('display_terms_and_conditions');
-            $terms_and_conditions_content = $this->settings_model->get_setting('terms_and_conditions_content');
-            $display_privacy_policy = $this->settings_model->get_setting('display_privacy_policy');
-            $privacy_policy_content = $this->settings_model->get_setting('privacy_policy_content');
-            $display_any_provider = $this->settings_model->get_setting('display_any_provider');
             $timezones = $this->timezones->to_array();
             $chinese_name = $this->host_model->get_host('chinese_name');
             $english_name = $this->host_model->get_host('english_name');
@@ -755,9 +746,6 @@ class Appointments extends EA_Controller {
             $logo = $this->host_model->get_host('logo');
             $description = $this->host_model->get_host('description');
             $main_color = $this->host_model->get_host('main_color');
-            $secondary_color = $this->host_model->get_host('secondary_color');
-            $text_color = $this->host_model->get_host('text_color');
-
 
             // Load the book appointment view.
             $variables = [
@@ -765,26 +753,13 @@ class Appointments extends EA_Controller {
                 'company_address' => $company_address,
                 'company_logo' => $company_logo,
                 'company_banner' => $company_banner,
-                'date_format' => $date_format,
-                'time_format' => $time_format,
-                'first_weekday' => $first_weekday,
-                'require_phone_number' => $require_phone_number,
-                'display_cookie_notice' => $display_cookie_notice,
-                'cookie_notice_content' => $cookie_notice_content,
-                'display_terms_and_conditions' => $display_terms_and_conditions,
-                'terms_and_conditions_content' => $terms_and_conditions_content,
-                'display_privacy_policy' => $display_privacy_policy,
-                'privacy_policy_content' => $privacy_policy_content,
                 'timezones' => $timezones,
-                'display_any_provider' => $display_any_provider,
                 'chinese_name' => $chinese_name,
                 'english_name' => $english_name,
                 'url' => $url,
                 'logo' => $logo,
                 'description' => $description,
                 'main_color' => $main_color,
-                'secondary_color' => $secondary_color,
-                'text_color' => $text_color
             ];
         }
         catch (Exception $exception)

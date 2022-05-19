@@ -53,30 +53,12 @@
                                     <thead>
                                         <tr>
                                         <th scope="col">#</th>
-                                        <th scope="col">服務</th>
                                         <th scope="col">預約時間</th>
+                                        <th scope="col">服務項目</th>
                                         <th scope="col">狀態</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
-                                        <tr>
-                                        <th scope="row">1</th>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        </tr>
-                                        <tr>
-                                        <th scope="row">2</th>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        </tr>
-                                        <tr>
-                                        <th scope="row">3</th>
-                                        <td></td>
-                                        <td></td>
-                                        </tr>
-                                    </tbody>
+                                    <tbody></tbody>
                                 </table>
                             </div>
                         </div>
@@ -113,34 +95,12 @@
     </div>
 </div>
 
-<?php if ($display_cookie_notice === '1'): ?>
-    <?php require 'cookie_notice_modal.php' ?>
-<?php endif ?>
-
-<?php if ($display_terms_and_conditions === '1'): ?>
-    <?php require 'terms_and_conditions_modal.php' ?>
-<?php endif ?>
-
-<?php if ($display_privacy_policy === '1'): ?>
-    <?php require 'privacy_policy_modal.php' ?>
-<?php endif ?>
 
 <script>
     var GlobalVariables = {
         baseUrl: <?= json_encode(config('base_url')) ?>,
-        manageMode: <?= $manage_mode ? 'true' : 'false' ?>,
-        customerToken: <?= json_encode($customer_token) ?>,
-        dateFormat: <?= json_encode($date_format) ?>,
-        timeFormat: <?= json_encode($time_format) ?>,
-        firstWeekday: <?= json_encode($first_weekday) ?>,
-        displayCookieNotice: <?= json_encode($display_cookie_notice === '1') ?>,
-        appointmentData: <?= json_encode($appointment_data) ?>,
-        providerData: <?= json_encode($provider_data) ?>,
-        customerData: <?= json_encode($customer_data) ?>,
-        displayAnyProvider: <?= json_encode($display_any_provider) ?>,
         csrfToken: <?= json_encode($this->security->get_csrf_hash()) ?>,
         lineLiff: '<?= Config::LINE_LIFF ?>',
-        mainColor: <?= json_encode($main_color) ?>
     };
 
     var EALang = <?= json_encode($this->lang->language) ?>;
@@ -157,12 +117,12 @@
 <script src="<?= asset_url('assets/ext/datejs/date.min.js') ?>"></script>
 <script src="<?= asset_url('assets/ext/moment/moment.min.js') ?>"></script>
 <script src="<?= asset_url('assets/ext/moment/moment-timezone-with-data.min.js') ?>"></script>
-<script src="<?= asset_url('assets/js/frontend_book_api.js?q=3213124124') ?>"></script>
-<script src="<?= asset_url('assets/js/frontend_book.js?q=45642341341') ?>"></script>
+<script src="<?= asset_url('assets/js/frontend_book_record_api.js?q=3213124124') ?>"></script>
+<script src="<?= asset_url('assets/js/frontend_book_record.js?q=45642341341') ?>"></script>
 
 <script>
     $(function () {
-        FrontendBook.initialize(true, GlobalVariables.manageMode);
+        FrontendBookRecord.initialize(true, GlobalVariables.manageMode);
         GeneralFunctions.enableLanguageSelection($('#select-language'));
     });
 </script>

@@ -15,9 +15,7 @@ class Record extends EA_Controller {
 
     public function get_appointments_from_line_id()
     {   
-        $lineUserId = 'U6260f39e480af845875270a10dfcc9e7';
-
-        // $lineUserId = $this->input->post('lineUserId');
+        $lineUserId = $this->input->post('lineUserId');
 
         if (empty($lineUserId))
         {
@@ -25,9 +23,12 @@ class Record extends EA_Controller {
         }
         else
         {
+            $appointment = [];
             $customer_id = $this->customers_model->get_value_from_line_id('id', $lineUserId);
             $appointments = $this->appointments_model->get_appointments_from_customer($customer_id);
+
             $response = $appointments; 
+
         }
 
         $this->output

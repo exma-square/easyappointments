@@ -620,10 +620,8 @@ class Appointments_model extends EA_Model {
             'start_datetime <=' => $interval_end . " 00:00:00",
             'situation' => 1,
         ])->result_array();
-        // $sql = $this->db->last_query();
-        // echo $sql;
-        return $result;
 
+        return $result;
     }
 
     /**
@@ -631,7 +629,12 @@ class Appointments_model extends EA_Model {
      */
     public function get_appointments_from_customer($customer_id)
     {
-        $result = $this->db->get_where('appointments', ['id_users_customer' => $customer_id])->result_array();
+        $situation_refuse = 2;
+        $result = $this->db
+        ->get_where('appointments', [
+            'id_users_customer' => $customer_id, 
+            'situation !=' => $situation_refuse,
+        ])->result_array();
 
         return $result;
     }
