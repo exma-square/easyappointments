@@ -127,7 +127,7 @@ body {
 
 #book-appointment-wizard .wizard-frame .command-buttons .btn {
     min-width: 120px;
-    margin-left: 30px;
+    margin-left: 10px;
 }
 
 #book-appointment-wizard .wizard-frame .command-buttons .btn-success{
@@ -397,7 +397,7 @@ body {
     #book-appointment-wizard #steps {
         display: inline-block;
         float: none;
-        margin: 10px 235px
+        margin: 10px 265px
     }
 
     #book-appointment-wizard .wizard-frame {
