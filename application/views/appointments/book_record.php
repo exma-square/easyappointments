@@ -46,15 +46,16 @@
                         <div class="col">
                             <div class="form-group">
 
-                                <div id="recordCard"></div>
-                                <!-- <div id="appointment-details" class="col-12 col-md-6" style="margin-left: 3%; margin-top: 3%"></div> -->
+                                <div class="recordCard"></div>
+                                <div class="appointment-details col-12 col-md-6" 
+                                     style="margin-left: 3%; margin-top: 3%; margin-bottom: 3%"></div>
 
                                 <table class="table">
                                     <thead>
                                         <tr>
                                         <th scope="col">#</th>
                                         <th scope="col">預約時間</th>
-                                        <th scope="col">服務項目</th>
+                                        <th scope="col" id="service">服務項目</th>
                                         <th scope="col">狀態</th>
                                         </tr>
                                     </thead>

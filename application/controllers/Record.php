@@ -29,11 +29,9 @@ class Record extends EA_Controller {
             foreach($appointments as $id_services => $appointments)
             {
                 $service = $this->services_model->get_row($appointments['id_services']);
-                $appointments['id_services'] = $service['name'];
-                $response[] = $appointments;
+                $response[] = $appointments + $service;
             }
         }
-
         $this->output
             ->set_content_type('application/json')
             ->set_output(json_encode($response));  

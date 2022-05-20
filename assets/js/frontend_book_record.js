@@ -7,7 +7,7 @@ window.FrontendBookRecord = window.FrontendBookRecord || {};
     exports.initialize = function (defaultEventHandlers, manageMode) {
         defaultEventHandlers = defaultEventHandlers || true;
         manageMode = manageMode || false;
-        
+
         liff
         .init({ liffId: GlobalVariables.lineLiff })
         .then(() => {
