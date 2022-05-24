@@ -148,6 +148,25 @@ function line_message_appointment($settings, $customer, $service, $appointment){
                                     'flex' => 0
                                 ]
                             ]
+                        ],
+                        [
+                            'type' => 'box',
+                            'layout' => 'horizontal',
+                            'margin' => 'md',
+                            'contents' => [
+                                [
+                                    'type' => 'text',
+                                    'text' => '查詢我的預約',
+                                    'size' => 'xs',
+                                    'color' => '#0080FF',
+                                    'flex' => 0,
+                                    'action' => [
+                                        'type' => 'uri',
+                                        'label' => 'action',
+                                        'uri' => base_url('/index.php/appointments/book_record')
+                                    ],
+                                ]
+                            ]
                         ]
                     ]
                 ],
@@ -315,6 +334,25 @@ function line_message_change($settings, $customer, $service, $appointment){
                                 'flex' => 0
                             ]
                         ]
+                    ],
+                    [
+                        'type' => 'box',
+                        'layout' => 'horizontal',
+                        'margin' => 'md',
+                        'contents' => [
+                            [
+                                'type' => 'text',
+                                'text' => '查詢我的預約',
+                                'size' => 'xs',
+                                'color' => '#0080FF',
+                                'flex' => 0,
+                                'action' => [
+                                    'type' => 'uri',
+                                    'label' => 'action',
+                                    'uri' => base_url('/index.php/appointments/book_record')
+                                ],
+                            ]
+                        ]
                     ]
                 ]
             ],
@@ -466,10 +504,29 @@ function line_message_delete($settings, $customer, $service, $appointment){
                         'contents' => [
                             [
                                 'type' => 'text',
-                                'text' => '預約審核通過，拒絕才會收到此訊息，如有疑問請洽店家',
+                                'text' => '預約已刪除，如有疑問請洽店家',
                                 'size' => 'xs',
                                 'color' => '#aaaaaa',
                                 'flex' => 0
+                            ]
+                        ]
+                    ],
+                    [
+                        'type' => 'box',
+                        'layout' => 'horizontal',
+                        'margin' => 'md',
+                        'contents' => [
+                            [
+                                'type' => 'text',
+                                'text' => '查詢我的預約',
+                                'size' => 'xs',
+                                'color' => '#0080FF',
+                                'flex' => 0,
+                                'action' => [
+                                    'type' => 'uri',
+                                    'label' => 'action',
+                                    'uri' => base_url('/index.php/appointments/book_record')
+                                ],
                             ]
                         ]
                     ]
@@ -628,6 +685,25 @@ function line_message_cronjob($provider, $settings, $customer, $service, $appoin
                                     'size' => 'xs',
                                     'color' => '#aaaaaa',
                                     'flex' => 0
+                                ]
+                            ]
+                        ],
+                        [
+                            'type' => 'box',
+                            'layout' => 'horizontal',
+                            'margin' => 'md',
+                            'contents' => [
+                                [
+                                    'type' => 'text',
+                                    'text' => '查詢我的預約',
+                                    'size' => 'xs',
+                                    'color' => '#0080FF',
+                                    'flex' => 0,
+                                    'action' => [
+                                        'type' => 'uri',
+                                        'label' => 'action',
+                                        'uri' => base_url('/index.php/appointments/book_record')
+                                    ],
                                 ]
                             ]
                         ]

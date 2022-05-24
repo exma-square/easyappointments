@@ -56,7 +56,7 @@ window.FrontendBook = window.FrontendBook || {};
     exports.initialize = function (defaultEventHandlers, manageMode) {
         defaultEventHandlers = defaultEventHandlers || true;
         manageMode = manageMode || false;
-
+        
         liff
         .init({ liffId: GlobalVariables.lineLiff })
         .then(() => {
@@ -70,6 +70,7 @@ window.FrontendBook = window.FrontendBook || {};
                 $('#lineuserid').val(userid);
                 $('#first-name').val(firstName);
                 $('#last-name').val(lastName);
+                FrontendBookApi.getCustomerData(userid);
             })
             .catch((err) => {
                 // alert('error');

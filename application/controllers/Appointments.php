@@ -728,5 +728,45 @@ class Appointments extends EA_Controller {
         return $provider_list;
     }
 
+    /**
+     * 
+     */
+    public function book_record()
+    {
+        try
+        {
+            $company_name = $this->settings_model->get_setting('company_name');
+            $company_address = $this->settings_model->get_setting('company_address');
+            $company_logo = $this->settings_model->get_setting('company_logo');
+            $company_banner = $this->settings_model->get_setting('company_banner');
+            $timezones = $this->timezones->to_array();
+            $chinese_name = $this->host_model->get_host('chinese_name');
+            $english_name = $this->host_model->get_host('english_name');
+            $url = $this->host_model->get_host('url');
+            $logo = $this->host_model->get_host('logo');
+            $description = $this->host_model->get_host('description');
+            $main_color = $this->host_model->get_host('main_color');
+
+            // Load the book appointment view.
+            $variables = [
+                'company_name' => $company_name,
+                'company_address' => $company_address,
+                'company_logo' => $company_logo,
+                'company_banner' => $company_banner,
+                'timezones' => $timezones,
+                'chinese_name' => $chinese_name,
+                'english_name' => $english_name,
+                'url' => $url,
+                'logo' => $logo,
+                'description' => $description,
+                'main_color' => $main_color,
+            ];
+        }
+        catch (Exception $exception)
+        {
+            $variables['exceptions'][] = $exception;
+        }
+        $this->load->view('appointments/book_record', $variables);
+    }
 
 }
