@@ -313,7 +313,10 @@ class Backend_api extends EA_Controller {
             $response = AJAX_SUCCESS;
 
             //send appointment change line message
-            line_message_change($settings, $customer, $service, $appointment);
+            $is_notification = $this->input->post('is_notification');
+            if($is_notification == 1){
+                line_message_change($settings, $customer, $service, $appointment);
+            }
 
         }
         catch (Exception $exception)
@@ -474,7 +477,10 @@ class Backend_api extends EA_Controller {
             }
 
             //send appointment delet line message
-            line_message_delete($settings, $customer, $service, $appointment);
+            $is_notification = $this->input->post('is_notification');
+            if($is_notification == 1){
+                line_message_delete($settings, $customer, $service, $appointment);
+            }
 
         }
         catch (Exception $exception)

@@ -20,3 +20,9 @@ services:
         volumes:
             - ../:/var/www/html
             - ./server/php.ini:/usr/local/etc/php/conf.d/99-overrides.ini
+    cron:
+        image: easyappointments-server:v1
+        entrypoint: /bin/bash
+        command: ["cron"]
+        volumes:
+            - ./log/cron/cron.log:/var/log/cron/cron.log

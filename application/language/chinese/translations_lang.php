@@ -1,6 +1,8 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 // Chinese
 $lang['page_title'] = '準備預約';
+$lang['record_title'] = '預約記錄';
+$lang['appointment_record'] = '預約記錄';
 $lang['service_and_provider'] = '選擇車格以及服務項目';
 $lang['select_service'] = '選擇您需要的服務項目';
 $lang['select_provider'] = '選擇服務車格';
@@ -45,6 +47,8 @@ $lang['appointment_booked'] = '您已經成功完成預約了.';
 $lang['thank_you_for_appointment'] = '謝謝您與我們預約.下方，您將看到預約的詳細信息.如需修改,請點擊預約鏈接.';
 $lang['appointment_details_title'] = '預約詳細信息';
 $lang['customer_details_title'] = '客戶資料';
+$lang['recent_record'] = '近期預約';
+$lang['start_apppointment'] = '開始預約';
 $lang['branch'] = '車格選項';
 $lang['service'] = '服務項目';
 $lang['provider'] = '車格項目';
@@ -180,6 +184,8 @@ $lang['company_banner'] = '公司 Banner';
 $lang['company_banner_hint'] = '公司 Banner';
 $lang['company_link'] = '公司網址';
 $lang['company_link_hint'] = '公司的網址應當指向公司的官方網頁 (必需).';
+$lang['remind_time'] = '預約提醒訊息';
+$lang['remind_time_hint'] = '天以前提醒';
 $lang['go_to_booking_page'] = '進入預約頁面';
 $lang['settings_saved'] = '設置成功保存.';
 $lang['general'] = '一般設置';

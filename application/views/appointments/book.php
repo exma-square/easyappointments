@@ -338,7 +338,8 @@
                         <?= lang('back') ?>
                     </button>
                     <form id="book-appointment-form" style="display:inline-block" method="post">
-                        <button id="book-appointment-submit" type="button" class="btn btn-success">
+                        <button id="book-appointment-submit" type="button" class="btn btn-success" 
+                                style="background: <?= $main_color ?>; border-color: <?= $main_color ?>;">
                             <i class="fas fa-check-square mr-2"></i>
                             <?= ! $manage_mode ? lang('confirm') : lang('update') ?>
                         </button>
@@ -350,11 +351,11 @@
 
             <!-- FRAME FOOTER -->
 
-            <div id="frame-footer">
+            <div id="frame-footer" style="background: <?= $main_color ?>">
                 <small>
                     <span class="footer-powered-by">
                         Copyright
-                        <a href="https://easyappointments.org" target="_blank"> © 2020 車友趣</a>
+                        <a href="<?= $url ?>" target="_blank"> © 2020 <?= $chinese_name ?></a>
                         All rights reserved.
                     </span>
 
@@ -403,7 +404,8 @@
         customerData: <?= json_encode($customer_data) ?>,
         displayAnyProvider: <?= json_encode($display_any_provider) ?>,
         csrfToken: <?= json_encode($this->security->get_csrf_hash()) ?>,
-        lineLiff: '<?= Config::LINE_LIFF ?>'
+        lineLiff: '<?= Config::LINE_LIFF ?>',
+        mainColor: <?= json_encode($main_color) ?>
     };
 
     var EALang = <?= json_encode($this->lang->language) ?>;
@@ -420,8 +422,8 @@
 <script src="<?= asset_url('assets/ext/datejs/date.min.js') ?>"></script>
 <script src="<?= asset_url('assets/ext/moment/moment.min.js') ?>"></script>
 <script src="<?= asset_url('assets/ext/moment/moment-timezone-with-data.min.js') ?>"></script>
-<script src="<?= asset_url('assets/js/frontend_book_api.js?q=4234234235643') ?>"></script>
-<script src="<?= asset_url('assets/js/frontend_book.js?q=66545634535234') ?>"></script>
+<script src="<?= asset_url('assets/js/frontend_book_api.js?q=3213124124') ?>"></script>
+<script src="<?= asset_url('assets/js/frontend_book.js?q=45642341341') ?>"></script>
 
 <script>
     $(function () {

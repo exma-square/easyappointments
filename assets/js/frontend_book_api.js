@@ -345,4 +345,28 @@ window.FrontendBookApi = window.FrontendBookApi || {};
             });
     };
 
+    /**
+     * 
+     */
+    exports.getCustomerData = function (lineUserId){
+        var url = GlobalVariables.baseUrl + '/index.php/customer/send_customer_to_appoiment';
+        var data = {
+            csrfToken: GlobalVariables.csrfToken,
+            lineUserId: lineUserId,
+        };
+
+        // ajax
+        $.post(url, data)
+            .done(function (response) {
+                if (response) {
+
+                    $('#first-name').val(response.first_name);
+                    $('#last-name').val(response.last_name);
+                    $('#phone-number').val(response.phone_number);
+                    $('#email').val(response.email);
+                }
+            });
+
+    }
+
 })(window.FrontendBookApi);

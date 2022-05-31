@@ -210,12 +210,22 @@ window.BackendCalendarDefaultView = window.BackendCalendarDefaultView || {};
                     {
                         text: 'OK',
                         click: function () {
+
+                            var is_notification = is_notification || 1;
+                            if (confirm("是否要傳送line-message給客戶？")) {
+                                alert('已傳送！');
+                            } else {
+                                alert('已取消傳送！');
+                                is_notification = 0;
+                            }
+
                             url = GlobalVariables.baseUrl + '/index.php/backend_api/ajax_delete_appointment';
 
                             data = {
                                 csrfToken: GlobalVariables.csrfToken,
                                 appointment_id: lastFocusedEventData.data.id,
-                                delete_reason: $('#delete-reason').val()
+                                delete_reason: $('#delete-reason').val(),
+                                is_notification: is_notification,
                             };
 
                             $.post(url, data)
@@ -260,7 +270,7 @@ window.BackendCalendarDefaultView = window.BackendCalendarDefaultView || {};
         /**
          * Event: Function Aduit Appointment Situation
          */
-        function triggerApproveEvent(situation){
+        function triggerApproveEvent(situation,){
             var auditAppointment = lastFocusedEventData.data;
             var appointment = {
                 id: lastFocusedEventData.data.id,
@@ -272,7 +282,7 @@ window.BackendCalendarDefaultView = window.BackendCalendarDefaultView || {};
                 location: lastFocusedEventData.data.location,
                 notes: lastFocusedEventData.data.notes,
                 is_unavailable: false,
-                situation: situation
+                situation: situation,
             };
             
             var customer = {
@@ -310,7 +320,6 @@ window.BackendCalendarDefaultView = window.BackendCalendarDefaultView || {};
          */
          $calendarPage.on('click', '.refuse-popover', function () {
             $(this).parents('.popover').popover('dispose');
-
             var situation = 2;
             triggerApproveEvent(situation);
         });
@@ -322,7 +331,6 @@ window.BackendCalendarDefaultView = window.BackendCalendarDefaultView || {};
          */
          $calendarPage.on('click', '.pass-popover', function () {
             $(this).parents('.popover').popover('dispose');
-
             var situation = 1;
             triggerApproveEvent(situation);
         });

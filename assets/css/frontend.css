@@ -127,7 +127,7 @@ body {
 
 #book-appointment-wizard .wizard-frame .command-buttons .btn {
     min-width: 120px;
-    margin-right: 10px;
+    margin-left: 10px;
 }
 
 #book-appointment-wizard .wizard-frame .command-buttons .btn-success{
@@ -210,11 +210,9 @@ body {
 #book-appointment-wizard #frame-footer {
     padding: 15px;
     text-align: center;
-    
-    border-top: 1px solid #ebeef1;
-    background: #FF7E35;
-    
+    border-top: 1px solid #ebeef1;    
 }
+
 
 #book-appointment-wizard #frame-footer .footer-powered-by {
     color: #ebeef1;
@@ -308,6 +306,13 @@ body {
     border-color:#1F4E75;
 }
 
+#book-appointment-wizard #wizard-frame-0 label {
+    font-size: 20px;
+    margin-bottom: 12px;
+    color: #1F4E75;
+    padding-left: 30px;
+}
+
 #book-appointment-wizard #wizard-frame-1 label {
     font-size: 20px;
     margin-bottom: 12px;
@@ -392,7 +397,7 @@ body {
     #book-appointment-wizard #steps {
         display: inline-block;
         float: none;
-        margin: 10px 265px;
+        margin: 10px 265px
     }
 
     #book-appointment-wizard .wizard-frame {
