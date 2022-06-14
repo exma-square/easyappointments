@@ -723,6 +723,7 @@ class Providers_model extends EA_Model {
      */
     public function get_row($provider_id)
     {
+        $provider_id = (int)$provider_id;
         if ( ! is_numeric($provider_id))
         {
             throw new Exception('$provider_id argument is not a valid numeric value: ' . $provider_id);
